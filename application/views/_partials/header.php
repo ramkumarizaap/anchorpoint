@@ -39,7 +39,7 @@ $data = is_logged_in();
               </li>
               <li class="nav-item <?=($uri=='feedback')?"main-menu-active":"";?>">
                  <a class="nav-link " href="<?=base_url();?>feedback">All Feedback</a> </li>
-              <li class="nav-item logout-btn"> <a class="nav-link " href="<?=base_url();?>login/logout"> Logout</a></li>
+              <li class="nav-item"> <a class="nav-link " href="<?=base_url();?>login/logout"> Logout</a></li>
               <?php
             }
           ?>

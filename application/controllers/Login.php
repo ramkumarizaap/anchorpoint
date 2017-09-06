@@ -56,14 +56,30 @@ class Login extends Admin_controller
       $get = $this->login_model->get_where(array("email"=>$email),"*","users")->row_array();
       if($get)
       {
-        $this->session->set_flashdata("success_msg","New Password has been sent to your mail id.",TRUE);
+        $send = $this->send_mail($email);
+        if($send)
+          $this->session->set_flashdata("success_msg","New Password has been sent to your mail id.",TRUE);
+        else
+          $this->session->set_flashdata("error_msg","Something went wrong in sending mail.",TRUE);
       }
       else
       {
         $this->session->set_flashdata("error_msg","Invalid Email-ID",TRUE);
       }
         redirect("login");
-    } 
+    }
+    function send_mail($email)
+    {      
+      $this->email->from('ramkumar.izaap@gmail.com', 'Ramkumar');
+      $this->email->to($email);
+      $this->email->subject('New Password Link');
+      $template = $this->load->view("/login/email");
+      $this->email->message($template);
+      if($this->email->send())
+        return true;
+      else
+        return false;
+    }
     
 }
 ?>

@@ -1,8 +1,6 @@
-$(function(){
-
+$(document).ready(function(){
 	//$('a,button').tooltip();
 
-  $('#example').DataTable( );
  
 	$('.singledate').daterangepicker({
 	  singleDatePicker: true,
