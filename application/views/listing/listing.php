@@ -22,12 +22,12 @@
 ?>
 	<div id="data_table" class="">	
 		<div class="table-scrollable">
-			<table class="table table-striped table-hover tableSite table-bordered" id="data_table">
+			<table class="table table-hover tableSite" id="data_table">
 
 		<thead>
 			<tr>
 			<?php
-				if($uri!= 'room'){ ?>
+				if($uri!= 'room' && $uri!= 'feedback'){ ?>
 				<th> 
 					<input type="checkbox" name="check-all">
 				</th>
@@ -38,7 +38,7 @@
 				foreach ($fields as $field => $values):$cols++;?>
 
 				<?php if($values['default_view'] == '0') continue; ?>
-				<th width="10">
+				<th width="<?=$values['width'];?>">
 				<input type="hidden" value="<?php echo $base_url.$cur_page.'/'.$field.'/';?><?php echo Listing::reverse_direction($direction); ?>"> 
 	
 				<a href="<?php echo $base_url.$cur_page.'/'.$field.'/';?><?php echo Listing::reverse_direction($direction); ?>" data-original-title="Click to sort" data-toggle="tooltip" data-placement="top" title="Click to sort">
@@ -67,9 +67,9 @@
 
 				<?php
 
-				if($uri!= 'room' && $uri!= 'contact_form' && $uri != 'schedule'){ ?>
+				if($uri!= 'room'){ ?>
 
-					<th>Action</th>
+					<th width="10">Action</th>
 
 				<?php } ?>
 			</tr>
@@ -95,7 +95,7 @@
 			<tr id="<?php echo (isset($item['id']))?$item['id']:""; ?>" class="<?php echo $fridayrow;?>">
             <?php
 
-				if($uri!= 'room'){ ?>
+				if($uri!= 'room' && $uri!= 'feedback'){ ?>
 				<td>
                 <?php if((isset($item['id']) && !empty($item['id']))) { ?>
 
@@ -117,7 +117,7 @@
                 
 				<?php endforeach;?>
 
-	          <?php if($uri=="booking"){ ?>
+	          <?php if($uri=="booking" || $uri=="feedback"){ ?>
 				<td>
 					<?php if(strcmp($listing_action, '') === 0):?>
 					<a class="" href="<?php echo site_url($this->uri->segment(1, 'index')."/view_salary/".$item['id']."/".$item['e_month']."/".$item['e_year']);?>" target="_blank"
