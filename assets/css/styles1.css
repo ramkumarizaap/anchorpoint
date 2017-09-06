@@ -1,0 +1,75 @@
+.check-in-out .col-sm-6 {
+    padding-left: 0;
+    float: left;
+}
+.b-chech-in-out .col-sm-6 {
+    padding: 0;
+    float: left;
+}
+.pdf-order .col-sm-4 > .col-sm-4 {
+    padding: 0;
+    float: left;
+}
+.invoice-item .col-sm-6 {
+    padding: 0;
+    float: left;
+}
+
+div.dataTables_wrapper {
+        width: 1170px;
+        margin: 0 auto;
+    }
+.check-in-out fieldset
+{
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+.check-in-out fieldset legend
+{
+    width: auto;
+    padding-left: 5px;
+    padding-right: 5px
+}
+.tip-top
+{
+    font-size: 12px;
+    font-weight: bold;
+}
+span.error{color: #a94442;}
+.has-error span.select2-selection{border: 1px solid #a94442;}
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+  color: #a94442; }
+/* line 21, ../../../../../lib/gems/2.1.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_forms.scss */
+.has-error .form-control {
+  border-color: #a94442;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+  /* line 24, ../../../../../lib/gems/2.1.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_forms.scss */
+  .has-error .form-control:focus {
+    border-color: #843534;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483; }
+/* line 31, ../../../../../lib/gems/2.1.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_forms.scss */
+.has-error .input-group-addon {
+  color: #a94442;
+  border-color: #a94442;
+  background-color: #f2dede; }
+/* line 37, ../../../../../lib/gems/2.1.0/gems/bootstrap-sass-3.3.7/assets/stylesheets/bootstrap/mixins/_forms.scss */
+.has-error .form-control-feedback {
+  color: #a94442; }
+.table-scrollable
+  {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin: 10px 0 !important;
+  }
+  .pad-right-10{padding-right: 10px !important;}

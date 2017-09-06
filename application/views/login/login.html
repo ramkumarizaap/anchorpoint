@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>anchorpoint</title>
+
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="css/custom.css" rel="stylesheet" type="text/css">
+<link href="css/raja.css" rel="stylesheet" type="text/css">
+
+<!-- Custom styles for this template -->
+</head>
+
+<body>
+<section class="header clearfix">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container"> <a class="navbar-brand" href="index.html"><img src="images/logo.png" width="55" height="53"></a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"> <a class="nav-link " href="index.html">Home</a> </li>
+          <li class="nav-item main-menu-active"> <a class="nav-link " href="login.html">Login</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="booking-a-room.html">Booking A Room</a> </li>
+          <li class="nav-item "> <a class="nav-link" href="booking-a-log.html">Booking A Log</a> </li>
+          <li class="nav-item "> <a class="nav-link " href="room-stauts.html">Room Status</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="all-feed-back.html">All Feedback</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">Logout</a> </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</section>
+<div class=" container-fluid inner-page"> 
+<div class="row">
+ <div class="page-title"><div class="container"><h1>User account</h1></div></div></div>
+<div class="container marketing pad-top pad-bot room-status user-account">
+  <div class="inner-page"> 
+    
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-md-12">
+      <div class="">
+    <form class="form-horizontal" role="form" method="POST" action="/login">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <h2>Please Login</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group has-danger">
+                        <label class="sr-only" for="email">E-Mail Address</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                            <input type="text" name="name" class="form-control" id="name"
+                                   placeholder="user name" required autofocus>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            <i class="fa fa-close"></i> Example error message
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                            <input type="password" name="password" class="form-control" id="password"
+                                   placeholder="Password" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                        <!-- Put password error message here -->    
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6" style="padding-top: .35rem">
+                    <div class="form-check mb-2 mr-sm-2 mb-sm-0">
+                        <label class="form-check-label">
+                            <input class="form-check-input" name="remember"
+                                   type="checkbox" >
+                            <span style="padding-bottom: .15rem">Remember me</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row login-s">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary btn-md"><i class="fa fa-sign-in"></i> Login</button>
+                    <a class="btn btn-link" href="request-password.html">Request new password</a>
+                </div>
+            </div>
+        </form>
+       </div>
+     </div>
+    </div>
+   
+    </div>
+    <!-- /.row --> 
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="container">
+    <p> Copyright 2017 anchorpoint, Inc. All Rights Reserved </p>
+  </div>
+</footer>
+<script src="js/slim.min.js"></script> 
+<script src="js/custom.js"></script> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/jquery.min.js"></script>
+
+</body>
+</html>
