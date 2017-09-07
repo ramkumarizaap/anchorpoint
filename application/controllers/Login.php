@@ -71,9 +71,12 @@ class Login extends Admin_controller
     function send_mail($email)
     {      
       $this->email->from('ramkumar.izaap@gmail.com', 'Ramkumar');
+      $this->email->set_mailtype("html");
       $this->email->to($email);
       $this->email->subject('New Password Link');
-      $template = $this->load->view("/login/email");
+      $this->data['email'] = $email;
+      $this->data['uniqid'] = uniqid();
+      $template = $this->load->view("login/email",$this->data,true);
       $this->email->message($template);
       if($this->email->send())
         return true;

@@ -150,6 +150,10 @@ footer p { text-align: center; color: #dedede; margin-bottom: 0;}
 .header .navbar-expand-md .navbar-collapse {display: block !important;}
 
 }
+
+
+/*Start By Me*/
+
 a.navbar-brand{color: #000 !important;text-decoration: none;}
 .tabbable-panel {
   padding: 10px;
@@ -230,3 +234,7 @@ a.navbar-brand{color: #000 !important;text-decoration: none;}
   border-bottom: 1px solid #eee;
   padding-bottom: 15px;
 }
+.feedback-menu{position: fixed;top: 20%;transform: rotate(270deg);right: -20px;background: #000;color: #fff;padding: 10px;z-index: 999;}
+.feedback-menu a{color: #fff;text-decoration: none;}
+
+/* End By Me*/

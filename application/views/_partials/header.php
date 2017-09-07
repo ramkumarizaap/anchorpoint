@@ -1,4 +1,5 @@
 <?php
+
 $uri = $this->uri->segment(1);
 $uri1 = $this->uri->segment(2);
 $data = is_logged_in();
@@ -37,7 +38,7 @@ $data = is_logged_in();
               <li class="nav-item <?=($uri=='room' && $uri1=="status")?"main-menu-active":"";?>">
                 <a class="nav-link " href="<?=base_url();?>room/status">Room Status</a>
               </li>
-              <li class="nav-item <?=($uri=='feedback')?"main-menu-active":"";?>">
+              <li class="nav-item <?=($uri=='feedback' && $uri1!="contact")?"main-menu-active":"";?>">
                  <a class="nav-link " href="<?=base_url();?>feedback">All Feedback</a> </li>
               <li class="nav-item"> <a class="nav-link " href="<?=base_url();?>login/logout"> Logout</a></li>
               <?php
@@ -47,4 +48,7 @@ $data = is_logged_in();
       </div>
     </div>
   </nav>
+    <div class="feedback-menu">
+      <a href="<?=base_url();?>feedback/contact">Feedback</a>
+    </div>
 </section>

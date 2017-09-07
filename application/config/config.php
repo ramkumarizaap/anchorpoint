@@ -93,6 +93,8 @@ $config['language']	= 'english';
 |
 */
 $config['charset'] = 'UTF-8';
+$config['wordwrap'] = TRUE;
+$config['mailtype'] = 'html';
 
 /*
 |--------------------------------------------------------------------------

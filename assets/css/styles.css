@@ -51,6 +51,9 @@ form.operations { margin-bottom: 13px; }
 .btn-primary { background-color: rgba(219, 68, 55, 0.95) !important; border-color: rgba(219, 68, 55, 0.95) !important }
 hr.style14 { border-top: 1px dotted #8c8b8b; }
 .form-control:focus { border: none; border-bottom: 2px solid #3c348d; background: rgba(60, 52, 141, 0.08) !important; }
+
+/* Start By Me*/
+
 .table-scrollable
   {
     width: 100%;
@@ -93,6 +96,9 @@ hr.style14 { border-top: 1px dotted #8c8b8b; }
     font-weight: bold;
     cursor: help;
 }
+
+/* End By Me*/
+
 .all-feed-back thead, .room-status thead {
     background: #3f3f3f !important;
 }
@@ -137,3 +143,15 @@ i.fa.fa-key:before {
     /* left: -50px; */
     /* top: 10px; */
 }
+
+/* Start By Me*/
+
+table thead{background: #3f3f3f !important;}
+table thead th,table thead th a{color: #fff;border: none !important}
+table tbody > tr:nth-child(odd) {
+    background: #fff !important;
+}
+table tbody > tr:nth-child(even) {
+    background: rgb(227, 224, 255);
+}
+/* End By Me*/

@@ -3,6 +3,13 @@
 require_once(APPPATH."libraries/Admin_controller.php");
 class Feedback extends Admin_Controller
 {
+  protected $_feedback_validation_rules = array (
+                                    array('field' => 'name', 'label' => 'Name', 'rules' => 'trim|required'),
+                                    array('field' => 'rank', 'label' => 'Rank', 'rules' => 'trim|required'),
+                                    array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
+                                    array('field' => 'phone', 'label' => 'Contact Number', 'rules' => 'trim|required|numeric'),
+                                    array('field' => 'comments', 'label' => 'Comments', 'rules' => 'trim|required'));
+
 	function __construct()
   {
     parent::__construct();  
@@ -30,8 +37,34 @@ class Feedback extends Admin_Controller
     $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
     $this->layout->view('frontend/feedback/index');
   }
-  public function contact()
+  public function contact($edit_id='')
   {
+    $this->layout->set_title('Feedback Form');
+    $this->form_validation->set_rules($this->_feedback_validation_rules);       
+    if($this->form_validation->run())
+    {
+      $form = $this->input->post();
+      $ins['name'] = $form['name'];
+      $ins['rank'] = $form['rank'];
+      $ins['email'] = $form['email'];
+      $ins['contact_no'] = $form['phone'];
+      $ins['comments'] = $form['comments'];
+      if($edit_id)
+      {
+        $ins_id = $this->feedback_model->update(array("id"=>$edit_id),$ins,"feedback");
+        $this->session->set_flashdata("success_msg","Feedback updated successfully.",TRUE);
+      }
+      else
+      {
+        $ins_id = $this->feedback_model->insert($ins,"feedback");
+        $this->session->set_flashdata("success_msg","Feedback added successfully.",TRUE);
+      }
+      redirect("feedback/contact");
+    }
+    if($edit_id)
+        $this->data['editdata'] = $this->feedback_model->get_where(array("id"=>$edit_id))->row_array();
+    else
+      $this->data['editdata'] = array("id"=>"","name"=>"","rank"=>"","email"=>"","phone"=>"","comments"=>"");
     $this->layout->view('frontend/feedback/contact');
   }
   function delete($del_id)
