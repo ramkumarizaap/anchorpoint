@@ -28,7 +28,7 @@ $config['booking_logs'] = array(
 	"init_scripts" => 'listing/init_scripts',
 	"advance_search_view" => 'booking/filter',
 	"base_url"	=> 	'/booking/logs/',
-	"per_page"	=>	"20",
+	"per_page"	=>	"1",
 	"fields"	=> array(   
 					'inv_no'=>array('name'=>'Invoice No', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'po_no'=>array('name'=>'Po No', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
@@ -81,21 +81,35 @@ $config['room_status'] = array(
 
 
 
-$config['feedback_index'] = array(
+
+$config['taxi_logs'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
-	"advance_search_view" => 'feedback/filter',
-	"base_url"	=> 	'/feedback/index/',
-	"per_page"	=>	"20",
+	"advance_search_view" => 'taxi/filter',
+	"base_url"	=> 	'/taxi/logs/',
+	"per_page"	=>	"1",
 	"fields"	=> array(   
-					'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"10"),
-					'rank'=>array('name'=>'Rank', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"10"),
-					'email'=>array('name'=>'Email', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"10"),
-					'contact_no'=>array('name'=>'Contact Number', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"10"),
-					'comments'=>array('name'=>'Comments', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"50"),
-					
-					),
-	"default_order"	=> "id",
+					'inv_no'=>array('name'=>'Invoice No', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'driver_name'=>array('name'=>'Driver Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'officer_name'=>array('name'=>'Officer Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'rank'=>array('name'=>'Rank', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'vessel'=>array('name'=>'Assigned Vessel', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'date'=>array('name'=>'Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'from'=>array('name'=>'From', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'to'=>array('name'=>'To', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'trip_sheet'=>array('name'=>'Trip Sheet', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'kms'=>array('name'=>'No of KM', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'waiting'=>array('name'=>'Waiting Charge', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'amount'=>array('name'=>'Amount', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'cgst'=>array('name'=>'CGST 2.5%', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'sgst'=>array('name'=>'SGST 2.5%', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'toll'=>array('name'=>'Toll', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'parking'=>array('name'=>'Parking', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'invoice_sent'=>array('name'=>'Invoice Sent', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'cash_received'=>array('name'=>'Cash Received', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'total'=>array('name'=>'Total', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'grand_total'=>array('name'=>'Grand Total', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),),
+	"default_order"	=> "a.id",
 	"default_direction" => "DESC"
 );
 

@@ -53,10 +53,10 @@ class Listing
         $this->_CI->pagination->num_tag_open = '<li class="paginate_button disabled">';
         $this->_CI->pagination->num_tag_close = '</li>';
         
-        $this->_CI->pagination->next_tag_open = '<li class="paginate_button disabled">';
+        $this->_CI->pagination->next_tag_open = '<li class="paginate_button next disabled">';
         $this->_CI->pagination->next_tag_close = '</li>';
         
-        $this->_CI->pagination->last_tag_open = '<li class="paginate_button disabled">';
+        $this->_CI->pagination->last_tag_open = '<li class="paginate_button last disabled">';
         $this->_CI->pagination->last_tag_close = '</li>'; 
         
         

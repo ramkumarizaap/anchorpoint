@@ -32,11 +32,12 @@ class Booking extends Admin_Controller
     {
         parent::__construct();          
         $this->load->model('booking_model');
+        $this->load->library("pdf");
     }  
 
     public function index()
     {
-    	redirect("booking/create");
+    	redirect("booking/logs");
     }
     public function create($edit_id='')
 	  {
@@ -84,14 +85,16 @@ class Booking extends Admin_Controller
       if($edit_id)
         $this->data['editdata'] = $this->booking_model->get_bookings(array("a.id"=>$edit_id));
       else
-        $this->data['editdata'] = array("id"=>"","po_no"=>"","officer_name"=>"","course_name"=>"","checkin_date"=>"","checkout_date"=>"","e_checkout_date"=>"","checkin_time"=>"","e_checkout_time"=>"","checkout_time"=>"","breakfast"=>"","lunch"=>"","printout"=>"","laundry"=>"","snacks"=>"","inv_address_id"=>"","logistics"=>"","discount"=>"","checked_in"=>"");
+        $this->data['editdata'] = array("id"=>"","po_no"=>"","officer_name"=>"","course_name"=>"","checkin_date"=>"","checkout_date"=>"","e_checkout_date"=>"","checkin_time"=>"","e_checkout_time"=>"","checkout_time"=>"","breakfast"=>"","lunch"=>"","printout"=>"","laundry"=>"","snacks"=>"","inv_address_id"=>"","logistics"=>"","discount"=>"","checked_in"=>"","rank_id"=>"","executive"=>"","occupancy"=>"","room_name"=>"","purpose"=>"","vessel"=>"","inv_address"=>"","rank"=>"","room"=>"","executives"=>"","address"=>"");
 	    $this->layout->view('frontend/roombooking/create');
 	  }
 
 	  public function logs()
 	  {
+      /*Room Booking*/
       $this->layout->set_title('Booking Logs');
 	  	$this->layout->add_javascripts(array('listing'));
+      $this->data['tabs'] = $this->load->view('frontend/roombooking/tabs', $this->data, TRUE);
       $this->load->library('listing');
       $this->simple_search_fields = array('');
       $this->_narrow_search_conditions = array("po_no","officer_name","checkout_date_from","checkout_date_to","inv_no","invoice_link","status","pdf_downloaded");
@@ -120,13 +123,94 @@ class Booking extends Admin_Controller
         if($order=="1" || $order==1)
           $up['status']= "Closed";
         else if($order=="2" || $order==2)
-          $up['invoice_link'] = base_url()."booking/invoice/".$opt[$i];
+          $up['invoice_link'] = base_url().$this->invoice($opt[$i]);
         else
           $up['pdf_downloaded'] = "Yes";
         $ins_id = $this->booking_model->update(array("id"=>$opt[$i]),$up,"bookings");
       }
     }
 
+    public function invoice($id='')
+    {
+      $this->data['invoice'] = $this->booking_model->get_bookings(array("a.id"=>$id));
+      $html = $this->load->view("/frontend/roombooking/invoice",$this->data,true);
+
+      $pdf = $this->pdf->load();
+      $pdf->setFooter("Page {PAGENO} of {nb}");
+      $css = file_get_contents('assets/css/invoice.css');
+      $css .= file_get_contents('assets/css/bootstrap.min.css');
+      $pdf->WriteHTML($css,1);
+      $pdf->WriteHTML($html,2);
+      $pdfpath = "assets/pdf/".$this->data['invoice']['inv_no'].".pdf";
+      $pdf->Output($pdfpath, 'F');
+      return $pdfpath;
+    }
+
+    public function pdfupload()
+    {
+      $path = $this->do_upload()['upload_data']['file_name'];
+      $res = $this->ExtractTextFromPdf("assets/pdf/".$path)[0];
+      $q = array();
+      $q['vessel'] = get_ajax_row_id(array("name"=>$res['11']),"vessels");
+      $q['rank'] = get_ajax_row_id(array("name"=>$res['27']),"rank");
+      $q['officer_name'] = trim($res['26']);
+      $q['po_no'] = $res['8'];
+      $a = explode(" ",$res['14']);
+      $date = explode("/",$a[0]);
+      $checkindate = date("Y-m-d",strtotime($date[0]."-".$date[1]."-".$date[2]));
+      $checkintime = date("H:i",strtotime($a[1]));
+      $q['checkin_date'] = $checkindate;
+      $q['checkin_time'] = $checkintime;
+      $exe = explode(":",$res['34']);
+      $q['executive'] = get_ajax_row_id(array("name"=>trim($exe['1'])),"executives");
+      echo json_encode($q);
+    }
+    public function do_upload()
+    {
+      $config['upload_path']          = 'assets/pdf/';
+      $config['allowed_types']        = 'gif|jpg|png|pdf';
+      // $config['max_size']             = 10000;
+      // $config['max_width']            = 2024;
+      // $config['max_height']           = 1768;
+      $this->load->library('upload', $config);
+      if ( ! $this->upload->do_upload('file'))
+      {
+        $error = array('error' => $this->upload->display_errors());
+        // $this->load->view('upload_form', $error);
+        return $error;
+      }
+      else
+      {
+        $data = array('upload_data' => $this->upload->data());
+        // $this->load->view('upload_success', $data);
+        return $data;
+      }
+    }
+    function ExtractTextFromPdf ($pdfdata)
+    {
+      if (strlen ($pdfdata) < 1000 && file_exists ($pdfdata)) $pdfdata = file_get_contents ($pdfdata); //get the data from file
+      if (!trim ($pdfdata)) echo "Error: there is no PDF data or file to process.";
+      $result = array(); //this will store the results
+      //Find all the streams in FlateDecode format (not sure what this is), and then loop through each of them
+      if (preg_match_all ('/<<[^>]*FlateDecode[^>]*>>\s*stream(.+)endstream/Uis', $pdfdata, $m)) foreach ($m[1] as $chunk)
+      {
+        $chunk = gzuncompress (ltrim ($chunk)); //uncompress the data using the PHP gzuncompress function
+        //$chunk = iconv('UTF-8', 'ASCII//TRANSLIT', $chunk); //suggested in comments to code above to remove junk characters
+        //If there are [] in the data, then extract all stuff within (), or just extract () from the data directly
+        $a = preg_match_all ('/\[([^\]]+)\]/', $chunk, $m2) ? $m2[1] : array ($chunk); //get all the stuff within []
+        foreach ($a as $subchunk)
+        {
+          if (preg_match_all ('/\(([^\)]+)\)/', $subchunk, $m3))
+          {
+            //$result []= join ('', $m3[1]); //within ()
+            $result []= $m3[1]; //within ()
+          }
+        } 
+      }
+      else $result = "Error: there is no FlateDecode text in this PDF file that I can process.";
+      return $result; //return what was found
+    }
     
+
 }
 ?>

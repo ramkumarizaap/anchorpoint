@@ -29,17 +29,20 @@ $data = is_logged_in();
           if($data)
           {
             ?>
-              <li class="nav-item <?=($uri=='booking' && $uri1=="create")?"main-menu-active":"";?> ">
-                <a class="nav-link " href="<?=base_url();?>booking/create">Book a Room</a>
+              <li class="nav-item <?=($uri=='booking' && ($uri1=="logs" || $uri1=="create"))?"main-menu-active":"";?> ">
+                <a class="nav-link " href="<?=base_url();?>booking/logs">Book a Room</a>
               </li>
-              <li class="nav-item <?=($uri=='booking' && $uri1=="logs")?"main-menu-active":"";?>">
+              <li class="nav-item <?=($uri=='taxi' && ($uri1=="logs" || $uri1=="create"))?"main-menu-active":"";?> ">
+                <a class="nav-link " href="<?=base_url();?>taxi/logs">Book a Taxi</a>
+              </li>
+              <!-- <li class="nav-item <?=($uri=='booking' && $uri1=="logs")?"main-menu-active":"";?>">
                 <a class="nav-link" href="<?=base_url();?>booking/logs">Booking Log</a>
-              </li>
+              </li> -->
               <li class="nav-item <?=($uri=='room' && $uri1=="status")?"main-menu-active":"";?>">
                 <a class="nav-link " href="<?=base_url();?>room/status">Room Status</a>
               </li>
               <li class="nav-item <?=($uri=='feedback' && $uri1!="contact")?"main-menu-active":"";?>">
-                 <a class="nav-link " href="<?=base_url();?>feedback">All Feedback</a> </li>
+                <a class="nav-link " href="<?=base_url();?>feedback">All Feedback</a> </li>
               <li class="nav-item"> <a class="nav-link " href="<?=base_url();?>login/logout"> Logout</a></li>
               <?php
             }
@@ -49,6 +52,6 @@ $data = is_logged_in();
     </div>
   </nav>
     <div class="feedback-menu">
-      <a href="<?=base_url();?>feedback/contact">Feedback</a>
+      <a href="<?=base_url();?>feedback/contact"><img src="<?=base_url();?>assets/images/feedback.gif"></a>
     </div>
 </section>

@@ -67,7 +67,7 @@ class Booking_model extends App_model {
     public function get_bookings($where='',$table='')
     {
       $this->db->where($where);
-      $this->db->select("a.*,b.name as rank,c.name as room,d.name as vessel,e.name as executives,f.address as address,TIME_FORMAT(a.checkin_time,'%H:%i') as checkin_time,TIME_FORMAT(a.checkout_time,'%H:%i') as checkout_time,TIME_FORMAT(a.e_checkout_time,'%H:%i') as e_checkout_time");
+      $this->db->select("a.*,b.name as rank,c.name as room,d.name as vessel,e.name as executives,f.address as address,TIME_FORMAT(a.checkin_time,'%H:%i') as checkin_time,TIME_FORMAT(a.checkout_time,'%H:%i') as checkout_time,TIME_FORMAT(a.e_checkout_time,'%H:%i') as e_checkout_time,c.tariff");
       $this->db->from("bookings a");
       $this->db->join("rank b","a.rank_id=b.id");
       $this->db->join("rooms c","a.room_id=c.id");

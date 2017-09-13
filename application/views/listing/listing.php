@@ -12,7 +12,7 @@
 				from <?php echo $count;?>
 			</i>
 		</div>
-		<div class="pagination pull-right col-md-6" id="pagination">
+		<div class="pagination pull-right" id="pagination">
 			<?php echo $pagination ?>
 		</div>
 	</div>
@@ -28,7 +28,7 @@
 			<tr>
 			<?php
 				if($uri!= 'room' && $uri!= 'feedback'){ ?>
-				<th> 
+				<th width="10"> 
 					<input type="checkbox" name="check-all">
 				</th>
 				<?php }?>
@@ -117,7 +117,7 @@
                 
 				<?php endforeach;?>
 
-	          <?php if($uri=="booking" || $uri=="feedback"){ ?>
+	          <?php if($uri=="booking" || $uri=="feedback" || $uri=="taxi"){ ?>
 				<td>
 					<?php if(strcmp($listing_action, '') === 0):?>
 					<a class="" href="<?php echo site_url($this->uri->segment(1, 'index')."/view_salary/".$item['id']."/".$item['e_month']."/".$item['e_year']);?>" target="_blank"

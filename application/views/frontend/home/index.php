@@ -44,20 +44,36 @@
     </div>  
   </section>
   
-  <section class="container-fluid pad-top pad-bot home-content-sec">
+  <section class="container-fluid pad-bot home-content-sec">
     <div class="container marketing">
   
       <div class="row">
        <div class="col-sm-6 content-box">
         <h2> About us</h2>
-          <p>Anchorpoint Hospitality Services Pvt Ltd, Registered October 2014, is an organisation primarily engaged in providing conveniently located Service apartments for it’s esteemed guests. Inmates enjoy comforts of home and an ambience which is acclaimed for it’s environs of hygiene and comfort. Our most appreciated feature, perhaps are, our sumptuous meals, prepared by our in house chefs that are of homely relish and richness. Expect warmth and hospitality from our well trained and caring staff.</p>
+          <p>Anchorpoint Hospitality Services Pvt Ltd, Registered October 2014, is an organisation primarily engaged in providing conveniently located Service apartments for it’s esteemed guests.</p>
+          <p>Inmates enjoy comforts of home and an ambience which is acclaimed for it’s environs of hygiene and comfort. Our most appreciated feature, perhaps are, our sumptuous meals, prepared by our in house chefs that are of homely relish and richness. Expect warmth and hospitality from our well trained and caring staff.</p>
+          <h2>Get in Touch</h2>
+          <p>Email: bookings@anchorpoint.in</p>
        </div>
         <div class="col-sm-6 content-box">
           <h2>Facilities</h2>
-          <p>Single and Twin occupancy air conditioned rooms with En suite Bathrooms 24 Hrs Complimentary wireless internet Television with DTH Steward service during meal timings Attentive Housekeeping Veg/non veg meals Laundry on demand</p>
-          <h2>Apartments Located At:</h2>
-          <p>Ceebros Boulevard Mettukupam Aiswarya Prapancha apartments Thuraipakkam Hiranandani Apartments, Egattur Board of Directors: Pooja Bhalla, Shefali Bhatia</p>
-
+          <ul>
+            <li>Single and Twin occupancy air conditioned rooms with En suite Bathrooms</li>
+            <li>24 Hrs Complimentary wireless internet</li>
+            <li>Television with DTH</li>
+            <li>Steward service during meal timings</li>
+            <li>Attentive Housekeeping</li>
+            <li>Veg/non veg meals</li>
+            <li>Laundry on demand</li>
+            </li>
+          </ul>
+          <h2>Apartments Located At</h2>
+          <ul>
+            <li>Ceebros Boulevard Mettukupam</li>
+            <li>Aiswarya Prapancha apartments Thuraipakkam</li>
+            <li>Hiranandani Apartments, Egattur</li>
+          </ul>
+          <p>Board of Directors: Pooja Bhalla, Shefali Bhatia</p>
         </div>       
       </div><!-- /.row -->
     </div>

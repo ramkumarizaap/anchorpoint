@@ -38,6 +38,14 @@ function get_user_data()
     }
 }
 
+function get_ajax_row_id($where='',$table='')
+{
+    $CI = & get_instance();
+    $CI->db->where($where);
+    $result = $CI->db->get($table)->row_array();
+    return $result['id'];
+}
+
 function get_user_role( $user_id = 0 )
 {
     $CI= & get_instance();
@@ -125,7 +133,7 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             $data = str2USDate($data);
             break;
         case 'money':
-            $data = '$'.number_format((float)$data, 2);
+            $data = number_format((float)$data, 2);
             break;
         case 'mailto':
             $data = '<a href="mailto:'.$data.'">'.$data.'</a>';
@@ -134,8 +142,11 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             $data = number_format((float)$data, 2);
             break;
         case 'link':
-            $data = '<a href="'.$data.'">Invoice</a>';
+            $data = '<a href="'.$data.'" target="_blank">Invoice</a>';
             break;
+        case 'word_money':
+            $data = convert_number($data)." Rupees only";
+        break;
 
         case 'tablink':
             $data = '<a href="'.$data.'" target="_blank">'.$data.'</a>';
@@ -175,8 +186,7 @@ function get_executives()
     $types = array();$i=0;
     foreach ($result as $row) 
     {
-        $types[$i]['id'] = $row['id'];
-        $types[$i]['name'] = $row['name'];
+        $types[$row['id']] = $row['name'];
         $i++;
     }
     return $types;
@@ -188,8 +198,7 @@ function get_rooms()
     $types = array();$i=0;
     foreach ($result as $row) 
     {
-        $types[$i]['id'] = $row['id'];
-        $types[$i]['name'] = $row['name'];
+        $types[$row['id']] = $row['name'];
         $i++;
     }
     return $types;
@@ -201,8 +210,7 @@ function get_address()
     $types = array();$i=0;
     foreach ($result as $row) 
     {
-        $types[$i]['id'] = $row['id'];
-        $types[$i]['address'] = $row['address'];
+        $types[$row['id']] = $row['address'];
         $i++;
     }
     return $types;
@@ -214,8 +222,7 @@ function get_vessels()
     $types = array();$i=0;
     foreach ($result as $row) 
     {
-        $types[$i]['id'] = $row['id'];
-        $types[$i]['name'] = $row['name'];
+        $types[$row['id']] = $row['name'];
         $i++;
     }
     return $types;
@@ -224,12 +231,10 @@ function get_ranks()
 {
     $CI = & get_instance();
     $result = $CI->db->get('rank')->result_array();
-    $types = array();$i=0;
+    $types = array();
     foreach ($result as $row) 
     {
-        $types[$i]['id'] = $row['id'];
-        $types[$i]['name'] = $row['name'];
-        $i++;
+        $types[$row['id']] = $row['name'];
     }
     return $types;
 }

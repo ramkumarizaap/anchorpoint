@@ -28,6 +28,36 @@ $('.timepicker').wickedpicker();
   //      maxDate: 
   // });
 
+  $("form#pdfForm").submit(function(){
+    form = new FormData();
+    form.append('file', $('#pdffile')[0].files[0]);
+    console.log($('#pdffile')[0].files[0]);
+    $.ajax({
+      url:base_url+'booking/pdfupload',
+      data:form,
+      processData: false, 
+      contentType: false,
+      type:"POST",
+      success:function(data)
+      {
+        data = JSON.parse(data);
+        $("input[name='officer_name']").val(data['officer_name']);
+        $("input[name='po_no']").val(data['po_no']);
+        $("input[name='checkin_date']").val(data['checkin_date']);
+        $("input[name='checkin_time']").val(data['checkin_time']);
+        $("select[name='rank']").val(data['rank']).change();
+        $("select[name='executive']").val(data['executive']).change();
+        $("select[name='vessel']").val(data['vessel']).change();
+        $("form#pdfForm")[0].reset();
+      },
+      error:function(data)
+      {
+        console.log("Error :"+data);
+      }
+    });
+     return false;
+  });
+
 
 
 

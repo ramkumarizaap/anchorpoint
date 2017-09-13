@@ -51,7 +51,17 @@
 							<p><b>Discount% :</b> <?=$editdata['discount'];?></p>
 						</div>
 						<div class="tab-pane <?=$active;?>" id="tab_default_2">
-							<form method="post" action="" enctype="multipart/form-data">
+							<form method="post" action="" id="pdfForm" enctype="multipart/form-data">
+								<div class="row">
+					  			<div class="col-sm-2">
+					  				<input type="file" name="userfile" id="pdffile">
+					  			</div>
+					  			<div class="col-sm-2 text-right">
+					  				<button type="submit" class="btn btn-primary">Upload</button>
+					  			</div>
+					  		</div>
+					  	</form>
+					  	<form method="post" class="bookingForm" action="" enctype="multipart/form-data">
 					  		<div class="row">
 					  			<div class="col-sm-4 <?=(form_error('po_no'))?'has-error':'';?>">
 					    			<label for="" class="control-label">Purchase Order NO </label><br />
@@ -65,103 +75,37 @@
 					  			</div>
 					   			<div class="col-sm-4 <?=(form_error('rank'))?'has-error':'';?>">
 					        	<label for="" class="control-label">Rank</label><br />
-					          <select name='rank' class="form-control width_select select2">
-					            <option value="">-None-</option>
-											<?php
-												if(get_ranks())
-												{
-													foreach (get_ranks() as $key => $value)
-													{
-														?>
-															<option <?=(isset($editdata['rank_id']) && $editdata['rank_id']==$value['id'])?"selected":'';?>
-																 value="<?=$value['id'];?>"><?=$value['name'];?></option>
-														<?php
-													}
-												}
-											?>
-					          </select>
+					         	<?php echo form_dropdown('rank', array('' => '-None-')+get_ranks(), set_value('rank', $editdata['rank_id']), 'class="form-control width_select select2"');?>
 					          <span class="error"><?=form_error('rank')?></span>
 					        </div>
 							  </div>
 					  		<div class="row">
 					    		<div class="col-sm-4 <?=(form_error('executive'))?'has-error':'';?>">
 					          <label for="" class="control-label">Booking Executive </label><br />
-					          <select name='executive' class="form-control width_select select2">
-					            <option value="">-None-</option>
-											<?php
-												if(get_executives())
-												{
-													foreach (get_executives() as $key => $value)
-													{
-														?>
-															<option <?=(isset($editdata['executive_id']) && $editdata['executive_id']==$value['id'])?"selected":'';?>
-																value="<?=$value['id'];?>"><?=$value['name'];?></option>
-														<?php
-													}
-												}
-											?>
-					          </select>
+					          <?php echo form_dropdown('executive', array('' => '-None-')+get_executives(), set_value('executive', $editdata['executive']), 'class="form-control width_select select2"');?>
 					          <span class="error"><?=form_error('executive')?></span>
 					  			</div>
 					    		<div class="col-sm-4 <?=(form_error('occupancy'))?'has-error':'';?>">
 					        	<label for="" class="control-label">Occupancy</label><br />
-					          <select name='occupancy' class="form-control width_select">
-					            <option value=''>- None -</option>
-					            <option <?=(isset($editdata['occupancy']) && $editdata['occupancy']=="Single")?"selected":'';?> value="Single">Single</option>
-											<option <?=(isset($editdata['occupancy']) && $editdata['occupancy']=="Twin")?"selected":'';?> value="Twin">Twin</option>
-					          </select>
+					          <?php echo form_dropdown('occupancy', array('Single' => 'Single',"Twin"=>"Twin"), set_value('occupancy', $editdata['occupancy']), 'class="form-control width_select"');?>
 					          <span class="error"><?=form_error('occupancy')?></span>
 					          <span data-tooltip="" class="has-tip tip-top" title="Room To be treated as Single or Twin">More information?</span>
 					    		</div>
 					    		<div class="col-sm-4 <?=(form_error('room_name'))?'has-error':'';?>">
 					        	<label for="" class="control-label">Room Name </label><br />
-					        	<select class="form-control select2" name="room_name">
-					        		<option value="">-None-</option>
-						          <?php
-												if(get_rooms())
-												{
-													foreach (get_rooms() as $key => $value)
-													{
-														?>
-															<option <?=(isset($editdata['room_id']) && $editdata['room_id']==$value['id'])?"selected":'';?>
-															value="<?=$value['id'];?>"><?=$value['name'];?></option>
-														<?php
-													}
-												}
-											?>
-										</select>
+					        	<?php echo form_dropdown('room_name', array('' => '-None-')+get_rooms(), set_value('room_name', $editdata['room_name']), 'class="form-control width_select select2"');?>
 										<span class="error"><?=form_error('room_name')?></span>
 					    		</div>
 					 			</div>
 					   		<div class="row">
 					    		<div class="col-sm-4 <?=(form_error('purpose'))?'has-error':'';?>">
 					        	<label for="" class="control-label">Purpose of Visit</label><br />
-					          <select name='purpose' class="form-control width_select">
-					            <option value=''>-None-</option>
-					            <option <?=(isset($editdata['purpose']) && $editdata['purpose']=="Joining")?"selected":'';?> value="Joining">Joining</option>
-											<option <?=(isset($editdata['purpose']) && $editdata['purpose']=="Training")?"selected":'';?> value="Training">Training</option>
-											<option <?=(isset($editdata['purpose']) && $editdata['purpose']=="Visit")?"selected":'';?> value="Visit">Visit</option>
-											<option <?=(isset($editdata['purpose']) && $editdata['purpose']=="Course")?"selected":'';?> value="Course">Course</option>
-										</select>
+					          <?php echo form_dropdown('purpose', array('' => '-None-','Joining'=>"Joining","Training"=>"Training","Visit"=>"Visit","Course"=>"Course"), set_value('purpose', $editdata['purpose']), 'class="form-control width_select"');?>
 										<span class="error"><?=form_error('purpose');?></span>
 					    		</div>
 							    <div class="col-sm-4 <?=(form_error('vessel'))?'has-error':'';?>">              
 							      <label for="" class="control-label">Assigned Vessel </label><br />
-							      <select class="form-control select2" name="vessel">
-					        		<option value="">-None-</option>
-						          <?php
-												if(get_vessels())
-												{
-													foreach (get_vessels() as $key => $value)
-													{
-														?>
-															<option <?=(isset($editdata['vessel_id']) && $editdata['vessel_id']==$value['id'])?"selected":'';?>
-															value="<?=$value['id'];?>"><?=$value['name'];?></option>
-														<?php
-													}
-												}
-											?>
-										</select>
+							      <?php echo form_dropdown('vessel', array('' => '-None-')+get_vessels(), set_value('vessel', $editdata['vessel']), 'class="form-control width_select select2"');?>
 										<span class="error"><?=form_error('vessel')?></span>
 							    </div>
 					    		<div class="col-sm-4 <?=(form_error('course_name'))?'has-error':'';?>">
@@ -182,7 +126,7 @@
 						          </div>
 						          <div class="col-sm-6 <?=(form_error('checkin_time'))?'has-error':'';?>">
 						          	<label for="" class="control-label">Time</label><br />
-					              <input class="form-control timepicker" id="time" type="text" name="checkin_time" value="<?=set_value('checkin_time',$editdata['checkin_time']);?>">
+					              <input class="form-control timepicker" type="text" name="checkin_time" value="<?=set_value('checkin_time',$editdata['checkin_time']);?>">
 					              <span class="error"><?=form_error('checkin_time')?></span>
 					              <span data-tooltip="" class="has-tip tip-top" data-selector="tooltipk5bqet" title="E.g, 23:00">More information?</span>
 						          </div>
@@ -193,7 +137,7 @@
 						        	<legend><span class="fieldset-legend">Expected Check Out Date </span></legend>
 						          <div class="col-sm-6">
 						          	<label for="" class="control-label">Date</label><br />
-						            <input class="form-control singledate" id="date" name="e_checkout_date" placeholder="" type="text" value="<?=set_value('checkin_time',$editdata['e_checkout_date']);?>" />
+						            <input class="form-control singledate" id="date" name="e_checkout_date" placeholder="" type="text" value="<?=set_value('e_checkout_date',$editdata['e_checkout_date']);?>" />
 						            <span data-tooltip="" class="has-tip tip-top" data-selector="tooltipy34ixm" title="E.g., 08/30/2017">More information?</span>
 						           </div>
 						          <div class="col-sm-6">
@@ -208,7 +152,7 @@
 						        	<legend><span class="fieldset-legend">Check Out Date </span></legend>
 						          <div class="col-sm-6 <?=(form_error('checkout_date'))?'has-error':'';?>">
 						          	<label for="" class="control-label">Date</label><br />
-						            <input class="form-control singledate" id="date" name="checkout_date" placeholder="" type="text" value="<?=set_value('checkin_time',$editdata['checkout_date']);?>">
+						            <input class="form-control singledate" id="date" name="checkout_date" placeholder="" type="text" value="<?=set_value('checkout_date',$editdata['checkout_date']);?>">
 						            <span class="error"><?=form_error('checkout_date')?></span>
 						            <span data-tooltip="" class="has-tip tip-top" data-selector="tooltipy34ixm" title="E.g., 08/30/2017">More information?</span>
 						          </div>
@@ -251,21 +195,7 @@
 							    </div>
 								  <div class="col-sm-4 <?=(form_error('inv_address'))?'has-error':'';?>">
 					          <label for="" class="control-label">Invoice Ref Address</label><br />
-					          <select name="inv_address" class="form-control width_select">
-					            <option value="">-None-</option>
-					            <?php
-												if(get_address())
-												{
-													foreach (get_address() as $key => $value)
-													{
-														?>
-															<option <?=(isset($editdata['inv_address_id']) && $editdata['inv_address_id']==$value['id'])?"selected":'';?>
-															value="<?=$value['id'];?>"><?=$value['address'];?></option>
-														<?php
-													}
-												}
-											?>
-					          </select>
+					          <?php echo form_dropdown('inv_address', array('' => '-None-')+get_address(), set_value('inv_address', $editdata['inv_address']), 'class="form-control width_select"');?>
 					          <span class="error"><?=form_error('inv_address')?></span>
 								  </div>
 					 			</div>
@@ -291,8 +221,9 @@
 							    </div>
 					 			</div>
 							  <div class="row">
+							  	<div class="col-sm-4"></div>
 							    <div class="col-sm-4">
-							      <button type="submit" class="btn btn-primary">Save</button>
+							      <button type="submit" class="btn btn-block btn-primary">Save</button>
 							    </div>
 					 			</div>
 					 		</form>

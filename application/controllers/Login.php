@@ -8,6 +8,10 @@ class Login extends Admin_controller
                                         array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
                                         array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required|alpha_dash')
                                       );
+     protected $_reset_validation_rules =array (
+                                        array('field' => 'npassword', 'label' => 'New Password', 'rules' => 'trim|required|alpha_dash'),
+                                        array('field' => 'cpassword', 'label' => 'Confirm Password', 'rules' => 'trim|required|alpha_dash|matches[npassword]')
+                                      );
     function __construct()
     {
         parent::__construct();  
@@ -47,7 +51,7 @@ class Login extends Admin_controller
 	  {
 	    $this->session->sess_destroy();
 	    $this->service_message->set_flash_message('logout_success');
-			redirect('login');
+			redirect('home');
 	  }
 
     public function request_password()
@@ -74,14 +78,30 @@ class Login extends Admin_controller
       $this->email->set_mailtype("html");
       $this->email->to($email);
       $this->email->subject('New Password Link');
-      $this->data['email'] = $email;
-      $this->data['uniqid'] = uniqid();
+      $this->data['email'] = base64_encode($email);
       $template = $this->load->view("login/email",$this->data,true);
       $this->email->message($template);
       if($this->email->send())
         return true;
       else
         return false;
+    }
+
+    public function reset($email_id='')
+    {
+      $email = base64_decode($email_id);
+      $this->form_validation->set_rules($this->_reset_validation_rules);       
+      if($this->form_validation->run())
+      {
+        $form = $this->input->post();
+        $up['password'] = $form['npassword'];
+        $ins_id = $this->login_model->update(array("email"=>$email),$up,"users");
+        $this->session->set_flashdata("success_msg","Password successfully reset.",TRUE);
+        redirect("login");
+      }
+      $this->data['email'] = $email_id;
+      $this->data['editdata'] = array("npassword"=>"","cpassword"=>"");
+      $this->layout->view("/login/reset");
     }
     
 }

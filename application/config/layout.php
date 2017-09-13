@@ -14,7 +14,7 @@ $config['layout']['default']['img_dir']     = 'assets/images/';
 
 $config['layout']['default']['javascripts'] = array('jquery-3.2.1.min','bootstrap.min','slim.min','build/global.min','moment','daterangepicker','function','wickedpicker','select2.min');
  
-$config['layout']['default']['stylesheets'] = array('bootstrap.min','styles','custom','daterangepicker','wickedpicker','select2.min');
+$config['layout']['default']['stylesheets'] = array('bootstrap.min','styles','custom','daterangepicker','wickedpicker','select2.min','ram','font-awesome.min');
 
 $config['layout']['default']['description'] = '';
 $config['layout']['default']['keywords']    = '';
