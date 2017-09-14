@@ -95,8 +95,8 @@ $config['taxi_logs'] = array(
 					'rank'=>array('name'=>'Rank', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'vessel'=>array('name'=>'Assigned Vessel', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'date'=>array('name'=>'Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'from'=>array('name'=>'From', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'to'=>array('name'=>'To', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'from_loc'=>array('name'=>'From', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'to_loc'=>array('name'=>'To', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'trip_sheet'=>array('name'=>'Trip Sheet', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'kms'=>array('name'=>'No of KM', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'waiting'=>array('name'=>'Waiting Charge', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
@@ -115,19 +115,20 @@ $config['taxi_logs'] = array(
 
 
 
-$config['reports_index'] = array(
+$config['feedback_index'] = array(
 	"view"		=> 	'listing/listing',
 	"init_scripts" => 'listing/init_scripts',
-	"advance_search_view" => 'frontend/reports/filter',
-	"base_url"	=> 	'/reports/index/',
+	"advance_search_view" => 'frontend/feedback/filter',
+	"base_url"	=> 	'/feedback/index/',
 	"per_page"	=>	"20",
 	"fields"	=> array(   
-						'emp_name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
-						'emp_code'=>array('name'=>'Emp Code', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1),					
-						'designation'=>array('name'=>'Designation', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),
-						'organization'=>array('name'=>'Organization', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1),),
-	"default_order"	=> "emp_name",
-	"default_direction" => "ASC"
+						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),					
+						'rank'=>array('name'=>'Rank', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),					
+						'email'=>array('name'=>'Email', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+						'contact_no'=>array('name'=>'Contact No','data_type'=> 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+						'comments'=>array('name'=>'Comments', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),),
+	"default_order"	=> "id",
+	"default_direction" => "desc"
 );
 
 

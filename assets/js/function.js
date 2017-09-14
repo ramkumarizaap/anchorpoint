@@ -18,7 +18,7 @@ $('.timepicker').wickedpicker();
   });
 
 
-	init_daterangepicker();
+  init_daterangepicker();
 
 	$('input[id=base-input]').change(function() {
         $('#fake-input').val($(this).val().replace("C:\\fakepath\\", ""));
@@ -58,6 +58,96 @@ $('.timepicker').wickedpicker();
      return false;
   });
 
+  $("form#LocationForm").submit(function(e){
+      e.preventDefault();
+      form = $(this).serializeArray();
+      if(form[0].value=="")
+      {
+        $(".msg").addClass("red");
+        $(".msg").html("Please Enter Location Name");
+        return false;
+      }      
+      $.ajax({
+      type:"POST",
+      url:base_url+"taxi/add_location",
+      data:form,
+      success:function(data)
+      {
+        data = JSON.parse(data);
+        $(".msg").addClass(data.class);
+        $(".msg").html(data.msg);
+        $("form#LocationForm")[0].reset();
+      },
+      error:function(data)
+      {
+        refresh_grid();
+      }
+    });
+  });
+  $("form#ChargeForm").submit(function(e){
+      e.preventDefault();
+      valid = 0;
+      form = $(this).serializeArray();
+      $("form#ChargeForm input,form#ChargeForm select").each(function(i,ele){
+        if($(this).val()=="")
+        {
+          $(ele).next(".msg").addClass("red");
+          str = $(this).attr("name").replace("_"," ");
+          $(ele).next(".msg").html("The "+str+" field is required");
+          valid++;
+        }
+        else if($(this).val()!="")
+        {
+          $(ele).next(".msg").html("");
+          $(ele).next(".msg").removeClass("red");
+        }
+      });
+      if(valid==0 || valid=="0")
+      { 
+        $.ajax({
+          type:"POST",
+          url:base_url+"taxi/add_charge",
+          data:form,
+          success:function(data)
+          {
+            console.log(data);
+            data = JSON.parse(data);
+            $("form#ChargeForm .msg.last-msg").addClass(data.class);
+            $("form#ChargeForm .msg.last-msg").html(data.msg);
+            $("form#ChargeForm")[0].reset();
+          },
+          error:function(data)
+          {
+            refresh_grid();
+          }
+        });
+      }
+  });
+
+  $("select.from_select,select.to_select,select.day_select").change(function(){
+    ch = $("input.taxi_charge");
+    km = $("input.taxi_kms");
+    from = $("select.from_select").val();
+    to = $("select.to_select").val();
+    day = $("select.day_select").val();
+    if(from!="" && to!="" && day!="")
+    {
+      $.ajax({
+        type:"POST",
+        url:base_url+"taxi/get_charge",
+        data:{from:from,to:to,day:day},
+        success:function(data)
+        {
+          data = JSON.parse(data);
+          ch.val(data.amount);km.val(data.kms);
+        },
+        error:function(data)
+        {
+          console.log(data);
+        }
+      });
+    }
+  });
 
 
 

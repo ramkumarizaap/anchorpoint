@@ -15,10 +15,12 @@ class Taxi_model extends App_model {
      function listing()
     {  
 		
-        $this->_fields = "a.*,b.name as rank,d.name as vessel";
-        $this->db->from('taxi_booking a');        
+        $this->_fields = "a.*,b.name as rank,d.name as vessel,c.name as from_loc,e.name as to_loc";
+        $this->db->from('taxi_booking a');
         $this->db->join("rank b","a.rank=b.id");
+        $this->db->join("locations c","a.from_loc=c.id");
         $this->db->join("vessels d","a.vessel=d.id");
+        $this->db->join("locations e","a.to_loc=e.id");
         $this->db->group_by('a.id');
         foreach ($this->criteria as $key => $value)
         {
@@ -56,6 +58,13 @@ class Taxi_model extends App_model {
       $this->db->group_by("a.id");
       $q = $this->db->get();
       return $q->row_array();
+    }
+
+    public function get_charge($where,$table)
+    {
+        $this->db->where($where);
+        $q = $this->db->get($table);
+        return $q->row_array();
     }
     
 }

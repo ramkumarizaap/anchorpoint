@@ -8,8 +8,7 @@
 	</div>
 	<div class="container marketing pad-top pad-bot booking-a-room">
   	<form method="post" class="bookingForm" action="" enctype="multipart/form-data">
-  		<div class="row">
-  			
+  		<div class="row">  			
   			<div class="col-sm-4 <?=(form_error('officer_name'))?'has-error':'';?>">
     			<label for="" class="control-label">Name of the Officer </label><br />
           <input class="form-control" placeholder="" type="text" name="officer_name" value="<?=set_value('officer_name',$editdata['officer_name']);?>">
@@ -39,14 +38,14 @@
   			</div>
     		<div class="col-sm-4 <?=(form_error('from'))?'has-error':'';?>">
           <label for="" class="control-label">From </label><br />
-          <?php echo form_dropdown('from', array('' => '-None-',"Airport"=>"Airport","Hiranandani"=>"Hiranandani","Prapancha"=>"Prapancha","AKDR"=>"AKDR"), set_value('from', $editdata['from']), 'class="form-control width_select"');?>
+          <?php echo form_dropdown('from', array('' => '-None-')+get_locations(), set_value('from', $editdata['from']), 'class="form-control width_select from_select"');?>
           <span class="error"><?=form_error('from')?></span>
   			</div>
  			</div>
   		<div class="row">
   			<div class="col-sm-4 <?=(form_error('to'))?'has-error':'';?>">
         	<label for="" class="control-label">To</label><br />
-          <?php echo form_dropdown('to', array('' => '-None-','Ceebros' => 'Ceebros',"Prapancha"=>"Prapancha","Hiranandani"=>"Hiranandani","AKDR"=>"AKDR","BALAJI T NAGAR"=>"BALAJI T NAGAR","BALAJI PERUNGUDI"=>"BALAJI PERUNGUDI"), set_value('to', $editdata['to']), 'class="form-control width_select"');?>
+          <?php echo form_dropdown('to', array('' => '-None-')+get_locations(), set_value('to', $editdata['to']), 'class="form-control width_select to_select"');?>
           <span class="error"><?=form_error('to')?></span>
     		</div>
     		<div class="col-sm-4 <?=(form_error('trip_sheet'))?'has-error':'';?>">
@@ -63,25 +62,26 @@
  			<div class="row">
     		<div class="col-sm-4 <?=(form_error('kms'))?'has-error':'';?>">
         	<label for="" class="control-label">No.of KM</label><br />
-          <input class="form-control" id="date" name="kms" placeholder="" type="text" value="<?=set_value('kms',$editdata['kms']);?>" />
+          <input class="form-control taxi_kms" id="date" name="kms" placeholder="" type="text" value="<?=set_value('kms',$editdata['kms']);?>" />
           <span class="error"><?=form_error('kms')?></span>
         </div>
         <div class="col-sm-4 <?=(form_error('day_type'))?'has-error':'';?>"">
          	<label for="" class="control-label">Day/Night</label><br />
-          <?php echo form_dropdown('day_type', array('' => '-None-','Day' => 'Day',"Night"=>"Night"), set_value('day_type', $editdata['day_type']), 'class="form-control width_select"');?>
+          <?php echo form_dropdown('day_type', array('' => '-None-','Day' => 'Day',"Night"=>"Night"), set_value('day_type', $editdata['day_type']), 'class="form-control width_select day_select"');?>
           <span class="error"><?=form_error('day_type')?></span>
         </div>
         <div class="col-sm-4 <?=(form_error('charge'))?'has-error':'';?>">
          	<label for="" class="control-label">Charge</label><br />
-          <input class="form-control" id="time" type="text" name="charge" value="<?=set_value('charge',$editdata['charge']);?>">
+          <input class="form-control taxi_charge" id="time" type="text" name="charge" value="<?=set_value('charge',$editdata['charge']);?>">
           <span class="error"><?=form_error('charge')?></span>
+        </div>
+        <div class="col-sm-4">
+          <label for="" class="control-label">Toll</label><br />
+          <input class="form-control" id="date" name="toll" placeholder="" type="text" value="<?=set_value('toll',$editdata['toll']);?>" />
         </div>
    		</div>
    		<div class="row">
-    		<div class="col-sm-4">
-        	<label for="" class="control-label">Toll</label><br />
-          <input class="form-control" id="date" name="toll" placeholder="" type="text" value="<?=set_value('toll',$editdata['toll']);?>" />
-        </div>
+    		
         <div class="col-sm-4">
          	<label for="" class="control-label">Parking</label><br />
           <input class="form-control" id="time" type="text" name="parking" value="<?=set_value('parking',$editdata['parking']);?>">

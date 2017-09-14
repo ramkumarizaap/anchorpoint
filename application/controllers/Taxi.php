@@ -121,6 +121,61 @@ class Taxi extends Admin_Controller
       $this->load->view("/frontend/roombooking/invoice",$this->data);
     }
 
+    public function add_location()
+    {
+      $ins['name'] = $_POST['location'];
+      $ins_id = $this->taxi_model->insert($ins,"locations");
+      if($ins_id)
+      {
+        $output['status'] = "success";
+        $output['msg'] = "Location inserted successfully.";
+        $output['class'] = "green";
+      }
+      else
+      {
+        $output['status'] = "success";
+        $output['msg'] = "Location not inserted";
+        $output['class'] = "red";
+      }
+      echo json_encode($output);
+    }
+     public function add_charge()
+    {
+      $ins['from_loc'] = $_POST['from'];
+      $ins['to_loc'] = $_POST['to'];
+      $ins['kms'] = $_POST['kms'];
+      $ins['day_charge'] = $_POST['day_charge'];
+      $ins['night_charge'] = $_POST['night_charge'];
+      $ins_id = $this->taxi_model->insert($ins,"taxi_charge");
+      if($ins_id)
+      {
+        $output['status'] = "success";
+        $output['msg'] = "Taxi Charge inserted successfully.";
+        $output['class'] = "green";
+      }
+      else
+      {
+        $output['status'] = "success";
+        $output['msg'] = "Taxi Charge not inserted";
+        $output['class'] = "red";
+      }
+      echo json_encode($output);
+    }
+
+    public function get_charge()
+    {
+      $from = $_POST['from'];
+      $to = $_POST['to'];
+      $day = $_POST['day'];
+      $get = $this->taxi_model->get_charge(array("from_loc"=>$from,"to_loc"=>$to),"taxi_charge");
+      if($day=="Day")
+        $output['amount'] = $get['day_charge'];
+      else
+        $output['amount'] = $get['night_charge'];
+      $output['kms'] = $get['kms'];
+      echo json_encode($output);
+    }
+
     public function pdfupload()
     {
       $path = $this->do_upload()['upload_data']['file_name'];

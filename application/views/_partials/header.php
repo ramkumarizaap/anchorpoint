@@ -29,15 +29,15 @@ $data = is_logged_in();
           if($data)
           {
             ?>
-              <li class="nav-item <?=($uri=='booking' && ($uri1=="logs" || $uri1=="create"))?"main-menu-active":"";?> ">
-                <a class="nav-link " href="<?=base_url();?>booking/logs">Book a Room</a>
+              <li class="nav-item <?=($uri=='booking' && $uri1=="create")?"main-menu-active":"";?> ">
+                <a class="nav-link " href="<?=base_url();?>booking/create">Book a Room</a>
+              </li>
+              <li class="nav-item <?=($uri=='booking' && $uri1=="logs")?"main-menu-active":"";?>">
+                <a class="nav-link" href="<?=base_url();?>booking/logs">Room Booking Log</a>
               </li>
               <li class="nav-item <?=($uri=='taxi' && ($uri1=="logs" || $uri1=="create"))?"main-menu-active":"";?> ">
                 <a class="nav-link " href="<?=base_url();?>taxi/logs">Book a Taxi</a>
               </li>
-              <!-- <li class="nav-item <?=($uri=='booking' && $uri1=="logs")?"main-menu-active":"";?>">
-                <a class="nav-link" href="<?=base_url();?>booking/logs">Booking Log</a>
-              </li> -->
               <li class="nav-item <?=($uri=='room' && $uri1=="status")?"main-menu-active":"";?>">
                 <a class="nav-link " href="<?=base_url();?>room/status">Room Status</a>
               </li>

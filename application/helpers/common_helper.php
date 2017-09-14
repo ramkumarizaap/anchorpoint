@@ -239,6 +239,18 @@ function get_ranks()
     return $types;
 }
 
+function get_locations()
+{
+    $CI = & get_instance();
+    $result = $CI->db->get('locations')->result_array();
+    $types = array();
+    foreach ($result as $row) 
+    {
+        $types[$row['id']] = $row['name'];
+    }
+    return $types;
+}
+
 function get_organizations()
 {
     $CI = & get_instance();

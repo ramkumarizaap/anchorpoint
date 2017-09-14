@@ -186,3 +186,9 @@ i.fa.fa-key:before {
     color: #fff !important;
 }
 .pagination li a{color:#001e26 !important;text-decoration: none;}
+.margin-left-20{margin-left: 20px;}
+.margin-right-20{margin-right: 20px !important;}
+
+.msg{padding: 5px;text-align: left;}
+.msg.red{color: red;}
+.msg.green{color: green;}

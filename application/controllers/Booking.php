@@ -137,10 +137,10 @@ class Booking extends Admin_Controller
 
       $pdf = $this->pdf->load();
       $pdf->setFooter("Page {PAGENO} of {nb}");
-      $css = file_get_contents('assets/css/invoice.css');
-      $css .= file_get_contents('assets/css/bootstrap.min.css');
-      $pdf->WriteHTML($css,1);
-      $pdf->WriteHTML($html,2);
+      // $css = file_get_contents('assets/css/invoice.css');
+      // $css .= file_get_contents('assets/css/bootstrap.min.css');
+      // $pdf->WriteHTML($css,1);
+      $pdf->WriteHTML($html);
       $pdfpath = "assets/pdf/".$this->data['invoice']['inv_no'].".pdf";
       $pdf->Output($pdfpath, 'F');
       return $pdfpath;
