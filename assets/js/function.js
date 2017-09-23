@@ -23,40 +23,74 @@ $('.timepicker').wickedpicker();
 	$('input[id=base-input]').change(function() {
         $('#fake-input').val($(this).val().replace("C:\\fakepath\\", ""));
     });
-
-  // $(".date_range_max").daterangepicker({
-  //      maxDate: 
-  // });
-
-  $("form#pdfForm").submit(function(){
-    form = new FormData();
-    form.append('file', $('#pdffile')[0].files[0]);
-    console.log($('#pdffile')[0].files[0]);
-    $.ajax({
-      url:base_url+'booking/pdfupload',
-      data:form,
-      processData: false, 
-      contentType: false,
-      type:"POST",
-      success:function(data)
-      {
-        data = JSON.parse(data);
-        $("input[name='officer_name']").val(data['officer_name']);
+$("#pdfForm").dropzone({
+    maxFiles: 1,
+    addRemoveLinks:true,
+    acceptedFiles:"application/pdf",
+    dictRemoveFile:"Remove",
+    dictDefaultMessage:"Drag or Drop pdf here",
+    url:base_url+'booking/pdfupload',
+    success:function(data)
+    {
+      data = JSON.parse(data.xhr.response);
+      console.log(data);
+       $("input[name='officer_name']").val(data['officer_name']);
         $("input[name='po_no']").val(data['po_no']);
         $("input[name='checkin_date']").val(data['checkin_date']);
         $("input[name='checkin_time']").val(data['checkin_time']);
         $("select[name='rank']").val(data['rank']).change();
         $("select[name='executive']").val(data['executive']).change();
         $("select[name='vessel']").val(data['vessel']).change();
-        $("form#pdfForm")[0].reset();
-      },
-      error:function(data)
-      {
-        console.log("Error :"+data);
-      }
-    });
-     return false;
+    },
+    reset:function()
+    {
+      $("form.bookingForm")[0].reset();
+      $(".dz-message").show();
+      $('.select2').val(null).trigger("change");
+    },
+    complete:function()
+    {
+      $(".dz-message").hide();
+    },
+    processing:function()
+    {
+      $(".dz-message").hide();
+    }
   });
+
+  // $(".date_range_max").daterangepicker({
+  //      maxDate: 
+  // });
+
+  // $("form#pdfForm").submit(function(){
+  //   form = new FormData();
+  //   form.append('file', $('#pdffile')[0].files[0]);
+  //   console.log($('#pdffile')[0].files[0]);
+  //   $.ajax({
+  //     url:base_url+'booking/pdfupload',
+  //     data:form,
+  //     processData: false, 
+  //     contentType: false,
+  //     type:"POST",
+  //     success:function(data)
+  //     {
+  //       data = JSON.parse(data);
+  //       $("input[name='officer_name']").val(data['officer_name']);
+  //       $("input[name='po_no']").val(data['po_no']);
+  //       $("input[name='checkin_date']").val(data['checkin_date']);
+  //       $("input[name='checkin_time']").val(data['checkin_time']);
+  //       $("select[name='rank']").val(data['rank']).change();
+  //       $("select[name='executive']").val(data['executive']).change();
+  //       $("select[name='vessel']").val(data['vessel']).change();
+  //       $("form#pdfForm")[0].reset();
+  //     },
+  //     error:function(data)
+  //     {
+  //       console.log("Error :"+data);
+  //     }
+  //   });
+  //    return false;
+  // });
 
   $("form#LocationForm").submit(function(e){
       e.preventDefault();
@@ -124,22 +158,22 @@ $('.timepicker').wickedpicker();
       }
   });
 
-  $("select.from_select,select.to_select,select.day_select").change(function(){
+  $("select.waiting_charge,input.taxi_kms,select.day_select").on('change keyup',function(){
     ch = $("input.taxi_charge");
-    km = $("input.taxi_kms");
-    from = $("select.from_select").val();
-    to = $("select.to_select").val();
+    waiting = $("select.waiting_charge").val();
+    kms = $("input.taxi_kms").val();
     day = $("select.day_select").val();
-    if(from!="" && to!="" && day!="")
+    if(kms!="" && day!="")
     {
       $.ajax({
         type:"POST",
         url:base_url+"taxi/get_charge",
-        data:{from:from,to:to,day:day},
+        data:{waiting:waiting,kms:kms,day:day},
         success:function(data)
         {
+          // console.log(data);
           data = JSON.parse(data);
-          ch.val(data.amount);km.val(data.kms);
+          ch.val(data.amount);
         },
         error:function(data)
         {
@@ -163,6 +197,7 @@ $('.timepicker').wickedpicker();
     data:form,
     success:function(data)
     {
+      console.log(data);
       $.fn.init_progress_bar();
       $("form.operationForm")[0].reset();
       refresh_grid();
@@ -182,6 +217,22 @@ $("input[name='check-all']").click(function(){
     $("input[name='op_select[]']").prop('checked',false);
 });
 
+
+$(".export-excel").click(function(){
+  $.ajax({
+    type:"POST",
+    url:base_url+"taxi/export_excel",
+    data:"",
+    success:function(data)
+    {
+      console.log(data);
+    },
+    error:function(data)
+    {
+      console.log(data);
+    }
+  });
+});
 
 
 });	

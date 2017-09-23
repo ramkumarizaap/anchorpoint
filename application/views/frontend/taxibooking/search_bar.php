@@ -9,15 +9,21 @@
       <label for="">Driver Name</label><br />
       <input class="form-control" name="driver_name" placeholder="" value="" type="text">
     </div>
-     <div class="col-sm-4">              
-      <label for="">Date</label><br />
-      <input class="form-control singledate" name="date" placeholder="" value="" type="text">
+     <div class="col-sm-4">
+      <div class="col-sm-6">
+        <label for="">Date(From)</label><br />
+        <input class="form-control singledate" name="from_date" placeholder="" value="" type="text">
+      </div>
+      <div class="col-sm-6">
+        <label for="">Date(To)</label><br />
+        <input class="form-control singledate" name="to_date" placeholder="" value="" type="text">
+      </div>
     </div>
   </div>
   <div class="row pdf-order">
     <div class="col-sm-4">
        <label for="">Trip Sheet</label><br />
-      <input class="form-control singledate" name="trip_sheet" placeholder="" value="" type="text">
+      <input class="form-control" name="trip_sheet" placeholder="" value="" type="text">
     </div>
     <div class="col-sm-4 invoice-item">
       <label for="">Invoice Number</label><br />
@@ -33,6 +39,20 @@
         <button class="btn btn-primary btn-block" type="button" id="simple_search_button" data-placement="top" data-toggle="tooltip" data-original-title="search"><span class="fa fa-search"></span> Search</button>
       </div>
     </div>
+  </div>
+</form>
+<br>
+<form action="<?=base_url();?>taxi/export_excel" method="post">
+  <div class="row">
+    <div class="col-md-12">
+      <button type="submit" class="pull-right btn btn-primary">Export Excel</button>
+    </div>
+    <input type="hidden" name="search_from_date" class="search_from_date">
+    <input type="hidden" name="search_to_date" class="search_to_date">
+    <input type="hidden" name="search_inv_no" class="search_inv_no">
+    <input type="hidden" name="search_officer_name" class="search_officer_name">
+    <input type="hidden" name="search_driver_name" class="search_driver_name">
+    <input type="hidden" name="search_trip_sheet" class="search_trip_sheet">
   </div>
 </form>
 

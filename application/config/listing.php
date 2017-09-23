@@ -28,7 +28,7 @@ $config['booking_logs'] = array(
 	"init_scripts" => 'listing/init_scripts',
 	"advance_search_view" => 'booking/filter',
 	"base_url"	=> 	'/booking/logs/',
-	"per_page"	=>	"1",
+	"per_page"	=>	"10",
 	"fields"	=> array(   
 					'inv_no'=>array('name'=>'Invoice No', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'po_no'=>array('name'=>'Po No', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
@@ -87,7 +87,7 @@ $config['taxi_logs'] = array(
 	"init_scripts" => 'listing/init_scripts',
 	"advance_search_view" => 'taxi/filter',
 	"base_url"	=> 	'/taxi/logs/',
-	"per_page"	=>	"1",
+	"per_page"	=>	"10",
 	"fields"	=> array(   
 					'inv_no'=>array('name'=>'Invoice No', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'driver_name'=>array('name'=>'Driver Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
@@ -106,6 +106,7 @@ $config['taxi_logs'] = array(
 					'toll'=>array('name'=>'Toll', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'parking'=>array('name'=>'Parking', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'invoice_sent'=>array('name'=>'Invoice Sent', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'invoice_link'=>array('name'=>'Invoice Link', 'data_type' => 'link', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'cash_received'=>array('name'=>'Cash Received', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'total'=>array('name'=>'Total', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'grand_total'=>array('name'=>'Grand Total', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),),

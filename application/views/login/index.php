@@ -37,7 +37,7 @@
                           </div>
                       </div>
                       <?php if(form_error('email')){?>
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                           <div class="form-control-feedback">
                               <span class="text-danger align-middle">
                                    <?=form_error('email');?>
@@ -58,7 +58,7 @@
                           </div>
                       </div>
                       <?php if(form_error('password')){?>
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                           <div class="form-control-feedback">
                               <span class="text-danger align-middle">
                                 <?=form_error('password');?>
@@ -79,7 +79,7 @@
                       </div>
                   </div>
                   <div class="row login-s">
-                      <div class="col-md-6">
+                      <div class="col-md-12 text-center">
                           <button type="submit" class="btn btn-primary btn-md"><i class="fa fa-sign-in"></i> Login</button>
                       </div>
                   </div>
@@ -106,7 +106,7 @@
                           </div>
                       </div>
                       <?php if(form_error('email')){?>
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                           <div class="form-control-feedback">
                               <span class="text-danger align-middle">
                                    <?=form_error('email');?>
@@ -116,7 +116,7 @@
                       <?php }?>
                   </div>
                   <div class="row login-s">
-                    <div class="col-md-6">
+                    <div class="col-md-12 text-center">
                       <button type="submit" class="btn btn-primary btn-md">Email New Password</button>
                     </div>
                   </div>

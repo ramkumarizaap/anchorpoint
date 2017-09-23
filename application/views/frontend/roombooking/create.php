@@ -51,15 +51,12 @@
 							<p><b>Discount% :</b> <?=$editdata['discount'];?></p>
 						</div>
 						<div class="tab-pane <?=$active;?>" id="tab_default_2">
-							<form method="post" action="" id="pdfForm" enctype="multipart/form-data">
-								<div class="row">
-					  			<div class="col-sm-2">
-					  				<input type="file" name="userfile" id="pdffile">
-					  			</div>
-					  			<div class="col-sm-2 text-right">
-					  				<button type="submit" class="btn btn-primary">Upload</button>
-					  			</div>
-					  		</div>
+							<form action="/" class="dropzone" id="pdfForm">
+								
+					  			<!-- <div class="col-sm-4 text-left">
+					  				<button type="submit" class="btn btn-sm btn-primary">Upload</button>
+					  			</div> -->
+					  		
 					  	</form>
 					  	<form method="post" class="bookingForm" action="" enctype="multipart/form-data">
 					  		<div class="row">
@@ -82,7 +79,7 @@
 					  		<div class="row">
 					    		<div class="col-sm-4 <?=(form_error('executive'))?'has-error':'';?>">
 					          <label for="" class="control-label">Booking Executive </label><br />
-					          <?php echo form_dropdown('executive', array('' => '-None-')+get_executives(), set_value('executive', $editdata['executive']), 'class="form-control width_select select2"');?>
+					          <?php echo form_dropdown('executive', array('' => '-None-')+get_executives(), set_value('executive', $editdata['executive_id']), 'class="form-control width_select select2"');?>
 					          <span class="error"><?=form_error('executive')?></span>
 					  			</div>
 					    		<div class="col-sm-4 <?=(form_error('occupancy'))?'has-error':'';?>">
@@ -93,7 +90,7 @@
 					    		</div>
 					    		<div class="col-sm-4 <?=(form_error('room_name'))?'has-error':'';?>">
 					        	<label for="" class="control-label">Room Name </label><br />
-					        	<?php echo form_dropdown('room_name', array('' => '-None-')+get_rooms(), set_value('room_name', $editdata['room_name']), 'class="form-control width_select select2"');?>
+					        	<?php echo form_dropdown('room_name', array('' => '-None-')+get_rooms(), set_value('room_name', $editdata['room_id']), 'class="form-control width_select select2"');?>
 										<span class="error"><?=form_error('room_name')?></span>
 					    		</div>
 					 			</div>
@@ -105,7 +102,7 @@
 					    		</div>
 							    <div class="col-sm-4 <?=(form_error('vessel'))?'has-error':'';?>">              
 							      <label for="" class="control-label">Assigned Vessel </label><br />
-							      <?php echo form_dropdown('vessel', array('' => '-None-')+get_vessels(), set_value('vessel', $editdata['vessel']), 'class="form-control width_select select2"');?>
+							      <?php echo form_dropdown('vessel', array('' => '-None-')+get_vessels(), set_value('vessel', $editdata['vessel_id']), 'class="form-control width_select select2"');?>
 										<span class="error"><?=form_error('vessel')?></span>
 							    </div>
 					    		<div class="col-sm-4 <?=(form_error('course_name'))?'has-error':'';?>">
@@ -166,6 +163,11 @@
 					    		</div>
 					 			</div>
 					   		<div class="row">
+					   			<div class="col-sm-4">
+					          <label for="" class="control-label">Cost Centre</label><br />
+					          <?php echo form_dropdown('cost_centre', array('' => '-None-','1' => '1',"2"=>"2"), set_value('cost_centre'), 'class="form-control width_select"');?>
+					          <span class="error"><?=form_error('cost_centre')?></span>
+					        </div>
 					    		<div class="col-sm-4 <?=(form_error('breakfast'))?'has-error':'';?>">
 					        	<label for="" class="control-label">Breakfast </label><br />
 					          <input class="form-control" placeholder="" type="text" name="breakfast" value="<?=set_value('breakfast',$editdata['breakfast']);?>">
@@ -176,13 +178,13 @@
 					          <input class="form-control" placeholder="" type="text" name="lunch" value="<?=set_value('lunch',$editdata['lunch']);?>">
 					          <span class="error"><?=form_error('lunch')?></span>
 					    		</div>
-							    <div class="col-sm-4 <?=(form_error('snacks'))?'has-error':'';?>">
+					 			</div>
+					   		<div class="row">
+					   			 <div class="col-sm-4 <?=(form_error('snacks'))?'has-error':'';?>">
 							    	<label for="" class="control-label">Snacks</label><br />
 							      <input class="form-control" placeholder="" type="text" name="snacks" value="<?=set_value('snacks',$editdata['snacks']);?>">
 							      <span class="error"><?=form_error('snacks')?></span>
 							    </div>
-					 			</div>
-					   		<div class="row">
 					    		<div class="col-sm-4 <?=(form_error('printout'))?'has-error':'';?>">
 					        	<label for="" class="control-label">Print Out </label><br />
 					          <input class="search-destiny form-control" name="printout" type="text" value="<?=set_value('printout',$editdata['printout']);?>">
@@ -193,14 +195,24 @@
 							      <input class="search-destiny form-control" name="laundry" type="text" value="<?=set_value('laundry',$editdata['laundry']);?>">
 							      <span class="error"><?=form_error('laundry')?></span>
 							    </div>
-								  <div class="col-sm-4 <?=(form_error('inv_address'))?'has-error':'';?>">
-					          <label for="" class="control-label">Invoice Ref Address</label><br />
-					          <?php echo form_dropdown('inv_address', array('' => '-None-')+get_address(), set_value('inv_address', $editdata['inv_address']), 'class="form-control width_select"');?>
-					          <span class="error"><?=form_error('inv_address')?></span>
-								  </div>
 					 			</div>
 						   	<div class="row">
-						   		<div class="col-sm-4 <?=(form_error('checked_in'))?'has-error':'';?>">
+						   		<div class="col-sm-4 <?=(form_error('inv_address'))?'has-error':'';?>">
+					          <label for="" class="control-label">Invoice Ref Address</label><br />
+					          <?php echo form_dropdown('inv_address', array('' => '-None-')+get_address(), set_value('inv_address', $editdata['inv_address_id']), 'class="form-control width_select"');?>
+					          <span class="error"><?=form_error('inv_address')?></span>
+								  </div>
+						   		
+					    		<div class="col-sm-4 <?=(form_error('logistics'))?'has-error':'';?>">
+					        	<label for="" class="control-label">Logistics </label><br />
+					          <input class="search-destiny form-control" name="logistics" type="text" value="<?=set_value('logistics',$editdata['logistics']);?>">
+					          <span class="error"><?=form_error('logistics')?></span>
+					    		</div>
+							    <div class="col-sm-4">
+							      <label for="">Discount %  </label><br />
+							      <input class="search-destiny form-control" name="discount" type="text" value="<?=set_value('discount',$editdata['discount']);?>">
+							    </div>
+							    <div class="col-sm-4 <?=(form_error('checked_in'))?'has-error':'';?>">
 						      	<label for="" class="control-label">Checked In * </label><br />
 						        <label class="radio-inline">
 						        	<input type="radio" name="checked_in" value="Yes" <?=(isset($editdata['checked_in']) && $editdata['checked_in']=="Yes")?"checked":'';?>>Yes
@@ -210,15 +222,6 @@
 					    			</label>
 					    			<span class="error"><?=form_error('checked_in')?></span>
 					    		</div>
-					    		<div class="col-sm-4 <?=(form_error('logistics'))?'has-error':'';?>">
-					        	<label for="" class="control-label">Logistics </label><br />
-					          <input class="search-destiny form-control" name="logistics" type="text" value="<?=set_value('logistics',$editdata['logistics']);?>">
-					          <span class="error"><?=form_error('logistics')?></span>
-					    		</div>
-							    <div class="col-sm-4">
-							      <label for="">Discount %  </label><br />
-							      <input class="search-destiny form-control" placeholder="" type="text" value="<?=set_value('discount',$editdata['discount']);?>">
-							    </div>
 					 			</div>
 							  <div class="row">
 							  	<div class="col-sm-4"></div>

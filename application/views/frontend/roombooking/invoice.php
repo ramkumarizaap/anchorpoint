@@ -250,6 +250,7 @@
                   <td height="106" colspan="9"><strong>BENEFICIARY BANK DETAILS:</strong> ANCHORPOINT HOSPITALITY SERVICES PRIVATE LIMITED.   Axis Bank, Thoraipakkam Branch, Plot No. 172 - 173, Chandrasekaran Avenue, Old  Mahaballipurm Road, Okkiyam Thuraipakkam, Chennai, Tamil Nadu, Pin 600097. Bank A.c  No: 914020052063794 IFSC CODE: UTIB0 001566 SWIFT CODE: AXISBBA75</td>
                 </tr>
             </table>
+          </div>
       
 <!--<div class=" container-fluid inner-page">
   <div class="container marketing pad-top pad-bot room-status invoice-page">

@@ -22,7 +22,7 @@
 	</head>
 
 	
-	<body>
+	<body class="largelogo">
 	
         <?php $this->load->view('_partials/header'); ?>
 		<!-- body content start here -->

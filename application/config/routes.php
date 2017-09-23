@@ -53,4 +53,4 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-//$route['reports/salary_report'] = 'reports/index';
+// $route['login'] = 'login';

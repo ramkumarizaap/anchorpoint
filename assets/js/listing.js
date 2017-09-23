@@ -93,7 +93,30 @@
 				namespace = options.namespace;
 			
 			$("#simple_search_button").bind('click', function(){
+
 				listing_form_data = $("#simple_search_form").serialize();
+				listing_form_data1 = $("#simple_search_form").serializeArray();
+				console.log(listing_form_data1);
+				if(current_controller=="taxi")
+				{
+					$(".search_officer_name").val(listing_form_data1[0].value);
+					$(".search_driver_name").val(listing_form_data1[1].value);
+					$(".search_from_date").val(listing_form_data1[2].value);
+					$(".search_to_date").val(listing_form_data1[3].value);
+					$(".search_trip_sheet").val(listing_form_data1[4].value);
+					$(".search_inv_no").val(listing_form_data1[5].value);
+				}
+				if(current_controller=="booking")
+				{
+					$(".search_po_no").val(listing_form_data1[0].value);
+					$(".search_from_date").val(listing_form_data1[1].value);
+					$(".search_to_date").val(listing_form_data1[2].value);
+					$(".search_officer_name").val(listing_form_data1[3].value);
+					$(".search_pdf_link").val(listing_form_data1[4].value);
+					$(".search_order_status").val(listing_form_data1[5].value);
+					$(".search_pdf_downloaded").val(listing_form_data1[6].value);
+					$(".search_inv_no").val(listing_form_data1[7].value);
+				}
 				$.fn.display_grid(target_url, 'data_table');
 			});
 			
@@ -187,6 +210,7 @@
 			//$("select[name='search_type']").selectpicker('deselectAll');
 			$("input[name='search_text']").val('');
 			$("#simple_search_button").trigger('click');
+
 		};
 						
 		$.fn.get_advance_search_form = function(){
@@ -197,7 +221,7 @@
 					$("#popOverBox").html(data.advance_filter_form);
 
 					init_checkbox(timesheet_checkbox_data);					
-
+					alert();
 					if(current_controller=='timesheet'){
 
 						init_daterangepicker($('.date_range').val());
