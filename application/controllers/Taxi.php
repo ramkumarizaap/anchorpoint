@@ -16,13 +16,17 @@ class Taxi extends Admin_Controller
                                     array('field' => 'charge', 'label' => 'Charge', 'rules' => 'trim|required'),
                                     array('field' => 'day_type', 'label' => 'Day Type', 'rules' => 'trim|required'),
                                     array('field' => 'kms', 'label' => 'No.of Kms', 'rules' => 'trim|required'),
-                                    array('field' => 'cash_received', 'label' => 'Cash Received', 'rules' => 'trim|required'),);
+                                    array('field' => 'cash_received', 'label' => 'Cash Received', 'rules' => 'trim|required'),
+                                    array('field' => 'rate', 'label' => 'Rate', 'rules' => 'trim|required'),
+                                    array('field' => 'discount', 'label' => 'Discount', 'rules' => 'trim|required|numeric'),);
 	
     function __construct()
     {
         parent::__construct();          
         $this->load->model('taxi_model');
         $this->load->library("pdf");
+        if(!is_logged_in())
+          redirect("home");
     }  
 
     public function index()
@@ -46,15 +50,19 @@ class Taxi extends Admin_Controller
 	      $ins['vessel'] = $form['vessel'];
 	      $ins['waiting'] = $form['waiting'];
 	      $ins['toll'] = $form['toll'];
+        $ins['cost_centre'] = $form['cost_centre'];
 	      $ins['parking'] = $form['parking'];
         $ins['day_type'] = $form['day_type'];
         $ins['kms'] = $form['kms'];
         $ins['amount'] = $form['charge'];
-        $ins['cgst'] = (($ins['amount'] + $form['toll'] + $form['parking']) / 100 ) * 6;
-        $ins['sgst'] = (($ins['amount'] + $form['toll'] + $form['parking']) / 100 ) * 6;
+        $ins['discount'] = $form['discount'];
+        $dis = ($form['charge'] / 100) * $form['discount'];
+        $tot = $form['charge'] - $dis;
+        $ins['cgst'] = (($tot + $form['toll'] + $form['parking']) / 100 ) * 6;
+        $ins['sgst'] = (($tot + $form['toll'] + $form['parking']) / 100 ) * 6;
         $ins['invoice_sent'] = "No";
         $ins['cash_received'] = $form['cash_received'];
-        $ins['total'] = ceil($ins['amount'] + $ins['toll'] + $ins['parking']);
+        $ins['total'] = ceil($tot + $ins['toll'] + $ins['parking']);
         $ins['grand_total'] = ceil($ins['total'] + $ins['sgst'] + $ins['cgst']);
         if($edit_id)
         {
@@ -76,13 +84,13 @@ class Taxi extends Admin_Controller
       if($edit_id)
         $this->data['editdata'] = $this->taxi_model->get_bookings(array("a.id"=>$edit_id));
       else
-        $this->data['editdata'] = array("id"=>"","driver_name"=>"","officer_name"=>"","to_loc"=>"","from_loc"=>"","date"=>"","trip_sheet"=>"","waiting"=>"","toll"=>"","parking"=>"","rank"=>"","vessel"=>"","charge"=>"","day_type"=>"","kms"=>"","cost_centre"=>"","cash_received"=>"");
+        $this->data['editdata'] = array("id"=>"","driver_name"=>"","officer_name"=>"","to_loc"=>"","from_loc"=>"","date"=>"","trip_sheet"=>"","waiting"=>"","toll"=>"25","parking"=>"","rank"=>"","vessel"=>"","charge"=>"","day_type"=>"","kms"=>"","cost_centre"=>"","cash_received"=>"","rate"=>"","discount"=>"");
 	    $this->layout->view('frontend/taxibooking/create');
 	  }
 
     public function waiting_charge($waiting)
     {
-      $charge = $this->taxi_model->get_charge("taxi_charge");
+      $charge = $this->taxi_model->get_charge('',"taxi_normal_charge");
       switch ($waiting)
       {
         case '30':
@@ -123,7 +131,7 @@ class Taxi extends Admin_Controller
       $this->data['search_conditions'] = $this->session->userdata($this->namespace.'_search_conditions');
       $this->data['per_page'] = $this->listing->_get_per_page();
       $this->data['per_page_options'] = array_combine($this->listing->_get_per_page_options(), $this->listing->_get_per_page_options());
-      $this->data['charge'] = $this->taxi_model->get_charge("taxi_charge");
+      $this->data['charge'] = $this->taxi_model->get_charge('',"taxi_normal_charge");
       $this->data['search_bar'] = $this->load->view('frontend/taxibooking/search_bar', $this->data, TRUE);
       $this->data['listing'] = $listing;
       $this->data['grid'] = $this->load->view('listing/view', $this->data, TRUE);
@@ -173,13 +181,24 @@ class Taxi extends Admin_Controller
      public function add_charge()
     {
       $ins['waiting_charge'] = $_POST['waiting_charge'];
-      $ins['day_charge'] = $_POST['day_charge'];
-      $ins['night_charge'] = $_POST['night_charge'];
-      $charge = $this->taxi_model->get_charge("taxi_charge");
+      $ins['day_charge'] = $_POST['normal_day_charge'];
+      $ins['night_charge'] = $_POST['normal_night_charge'];
+      $ins1['from_loc'] = $_POST['from_loc'];
+      $ins1['to_loc'] = $_POST['to_loc'];
+      $ins1['kms'] = $_POST['kms'];
+      $ins1['day_charge'] = $_POST['fixed_day_charge'];
+      $ins1['night_charge'] = $_POST['fixed_night_charge'];
+      $up = $this->taxi_model->update(array("id"=>"1"),$ins,"taxi_normal_charge");
+      $charge =$this->taxi_model->get_charge(array("from_loc"=>$_POST['from_loc'],"to_loc"=>$_POST['to_loc']),"taxi_fixed_charge");
       if($charge)
-        $ins_id = $this->taxi_model->update(array("id"=>"1"),$ins,"taxi_charge");
+      {
+        $ins_id = $this->taxi_model->update(array("id"=>"1"),$ins1,"taxi_fixed_charge");
+      }
       else
-        $ins_id = $this->taxi_model->insert($ins,"taxi_charge");
+      {
+        // $ins_id = $this->taxi_model->insert($ins,"taxi_normal_charge");
+        $ins_id = $this->taxi_model->insert($ins1,"taxi_fixed_charge");
+      }
       if($ins_id)
       {
         $output['status'] = "success";
@@ -198,23 +217,52 @@ class Taxi extends Admin_Controller
     public function get_charge()
     {
       $waiting = $_POST['waiting'];
-      if($waiting=="")
+      if($waiting!="")
+        $waiting = $this->waiting_charge($waiting);
+      else
         $waiting = "0";
       $kms = $_POST['kms'];
       $day = $_POST['day'];
-      $get = $this->taxi_model->get_charge("taxi_charge");
-      if($day=="Day")
-        $output['amount'] = $kms * $get['day_charge'] + $this->waiting_charge($waiting);
+      $from = $_POST['from'];
+      $to = $_POST['to'];
+      $rate = $_POST['rate'];
+      if($rate=="Fixed")
+      {
+        $get = $this->taxi_model->get_charge(array("from_loc"=>$from,"to_loc"=>$to),"taxi_fixed_charge");
+        if($day=="Day")
+          $output['amount'] = $get['day_charge'] + $waiting;
+        else
+          $output['amount'] = $get['night_charge'] + $waiting;
+        $output['kms'] = $get['kms'];
+      }
       else
-        $output['amount'] = $kms * $get['night_charge'] + $this->waiting_charge($waiting);
+      {
+        $get = $this->taxi_model->get_charge('',"taxi_normal_charge");
+        if($day=="Day")
+          $output['amount'] = $kms * $get['day_charge'] + $waiting;
+        else
+          $output['amount'] = $kms * $get['night_charge'] + $waiting;
+      }
       echo json_encode($output);
     }
-
+    public function ajax_get_charge()
+    {
+      $from = $_POST['from'];
+      $to = $_POST['to'];
+      if($from!='' && $to!='')
+      {
+        $get = $this->taxi_model->get_charge(array("from_loc"=>$from,"to_loc"=>$to),"taxi_fixed_charge");
+        $get['msg']="success";
+      }
+      else
+        $get['msg']="failed";
+      
+      $this->_ajax_output($get,TRUE);
+    }
     public function invoice($id='')
     {
       $this->data['invoice'] = $this->taxi_model->get_bookings(array("a.id"=>$id));
-      $html = $this->load->view("/frontend/taxibooking/invoice",$this->data,true);
-      // echo "<pre>";print_r($this->data['invoice']);exit;
+      $html = $this->load->view("/frontend/taxibooking/invoice",$this->data,TRUE);
       $pdf = $this->pdf->load();
       $pdf->setFooter("Page {PAGENO} of {nb}");
       // $pdf->WriteHTML($css,1);
@@ -229,7 +277,7 @@ class Taxi extends Admin_Controller
     public function export_excel()
     {
       // print_r($_POST);
-      $where = array();
+      $where = array();$remarks = "";$fuel="";$maintainence="";
       if(isset($_POST['search_officer_name']) && $_POST['search_officer_name']!='')
       {
         $where['a.officer_name'] = $_POST['search_officer_name'];
@@ -254,6 +302,13 @@ class Taxi extends Admin_Controller
       {
         $where['a.trip_sheet'] = $_POST['search_trip_sheet'];
       }
+      if(isset($_POST['remarks']) && $_POST['remarks']!='')
+        $remarks = $_POST['remarks'];
+      if(isset($_POST['fuel']) && $_POST['fuel']!='')
+        $fuel = $_POST['fuel'];
+      if(isset($_POST['maintainence']) && $_POST['maintainence']!='')
+        $maintainence = $_POST['maintainence'];
+      $tt = $fuel + $maintainence;
       header('Content-type: application/vnd.ms-excel');
       header('Content-Disposition: attachment; filename=Taxi-Booking-'.date("Y-m-d").'.xls');
       $books = $this->taxi_model->get_all_bookings($where);
@@ -262,10 +317,10 @@ class Taxi extends Admin_Controller
                   <th>Invoice No</th><th>Driver Name</th><th>Officer Name</th><th>Rank</th><th>Vessel</th><th>Date</th>
                   <th>From</th><th>To</th><th>Trip Sheet</th><th>No.of KM</th><th>Waiting Charge</th><th>Amount</th>
                   <th>CGST 6%</th><th>SGST 6%</th><th>Toll</th><th>Parking</th><th>Invoice Sent</th><th>Cash Received</th>
-                  <th>Total</th><th>Grand Total</th>
+                  <th>Total</th><th>Grand Total</th><th>Fuel & Maintainence</th><th>Remarks</th><th>Profit/Loss</th>
                 </thead>
               <tbody>";
-
+      $i=0;
       foreach ($books as $value)
       {
         $str .= "<tr>
@@ -288,12 +343,39 @@ class Taxi extends Admin_Controller
                   <td align='center'>".$value['invoice_sent']."</td>
                   <td align='center'>".$value['cash_received']."</td>
                   <td align='center'>".$value['total']."</td>
-                  <td align='center'>".$value['grand_total']."</td>
-                 </tr>";
+                  <td align='center'>".$value['grand_total']."</td>";
+                  if($i==0)
+                  {
+                    $str .= "<td>".$tt."</td>";
+                    $str .= "<td>".$remarks."</td>";
+                    $str .= "<td align='center'>".$this->get_profit_loss($where,$_POST)."</td>";
+                  }
+                  else
+                  {
+                    $str .= "<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
+                  }
+          $str .="</tr>";
+          $i++;
       }
       $str .= "</tbody>
               </table>";
       echo $str;
+    }
+    public function get_profit_loss($where='',$form='')
+    {
+      $fuel = 0;$ola = 0;$maintain = 0;$misc = 0;
+      if(isset($form['fuel']) && $form['fuel']!='')
+        $fuel = $form['fuel'];
+      if(isset($form['ola_clients']) && $form['ola_clients']!='')
+        $ola = $form['ola_clients'];
+      if(isset($form['maintainence']) && $form['maintainence']!='')
+        $maintain = $form['maintainence'];
+      if(isset($form['driver_salary']) && $form['driver_salary']!='')
+        $driver_sal = $form['driver_salary'];
+      if(isset($form['miscallenous']) && $form['miscallenous']!='')
+        $misc = $form['miscallenous'];      
+      $amt = $this->taxi_model->get_profit_loss($where);
+      return $amt['amt'] - $fuel - $ola - $maintain - $misc;
     }
 
     public function do_upload()

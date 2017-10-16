@@ -12,6 +12,8 @@ class Room extends Admin_Controller {
   {
     parent::__construct();
     $this->load->model('room_model');
+    if(!is_logged_in())
+          redirect("home");
   }  
 	public function index()
 	{
@@ -26,7 +28,7 @@ class Room extends Admin_Controller {
     $this->_narrow_search_conditions = array("po_no","officer_name","checkout_date_from","checkout_date_to","inv_no","invoice_link","status","pdf_downloaded");
     // $str = '<a href="'.site_url('booking/create/{id}').'" class="table-action"><i class="fa fa-edit edit"></i> Edit</a>';
     // $this->listing->initialize(array('listing_action' => $str));
-    $listing = $this->listing->get_listings('booking_model', 'listing');
+    $listing = $this->listing->get_listings('room_model', 'listing');
     if($this->input->is_ajax_request())
         $this->_ajax_output(array('listing' => $listing), TRUE);
     $this->data['bulk_actions'] = array('' => 'select', 'delete' => 'Delete');

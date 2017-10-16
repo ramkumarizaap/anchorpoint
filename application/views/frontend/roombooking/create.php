@@ -90,14 +90,15 @@
 					    		</div>
 					    		<div class="col-sm-4 <?=(form_error('room_name'))?'has-error':'';?>">
 					        	<label for="" class="control-label">Room Name </label><br />
-					        	<?php echo form_dropdown('room_name', array('' => '-None-')+get_rooms(), set_value('room_name', $editdata['room_id']), 'class="form-control width_select select2"');?>
+					        	<?php echo form_dropdown('room_name', array('' => '-None-')+get_rooms(), set_value('room_name', $editdata['room_id']), 'class="form-control width_select select2 room_name"');?>
 										<span class="error"><?=form_error('room_name')?></span>
+										<span><a href="javascript:;" onclick="get_status();">Check Room Availability</a></span>
 					    		</div>
 					 			</div>
 					   		<div class="row">
 					    		<div class="col-sm-4 <?=(form_error('purpose'))?'has-error':'';?>">
 					        	<label for="" class="control-label">Purpose of Visit</label><br />
-					          <?php echo form_dropdown('purpose', array('' => '-None-','Joining'=>"Joining","Training"=>"Training","Visit"=>"Visit","Course"=>"Course"), set_value('purpose', $editdata['purpose']), 'class="form-control width_select"');?>
+					          <?php echo form_dropdown('purpose', array('' => '-None-')+get_purpose(), set_value('purpose', $editdata['purpose']), 'class="form-control width_select"');?>
 										<span class="error"><?=form_error('purpose');?></span>
 					    		</div>
 							    <div class="col-sm-4 <?=(form_error('vessel'))?'has-error':'';?>">              
@@ -165,7 +166,7 @@
 					   		<div class="row">
 					   			<div class="col-sm-4">
 					          <label for="" class="control-label">Cost Centre</label><br />
-					          <?php echo form_dropdown('cost_centre', array('' => '-None-','1' => '1',"2"=>"2"), set_value('cost_centre'), 'class="form-control width_select"');?>
+					          <?php echo form_dropdown('cost_centre', array('' => '-None-')+get_cost_centre(), set_value('cost_centre', $editdata['cost_centre']), 'class="form-control width_select"');?>
 					          <span class="error"><?=form_error('cost_centre')?></span>
 					        </div>
 					    		<div class="col-sm-4 <?=(form_error('breakfast'))?'has-error':'';?>">
@@ -238,3 +239,9 @@
  	</div>
 </div>
 <!-- FOOTER -->
+<a href="#" style="display: none;" class="room_modal" data-remodal-target="modal">Show</a>
+<div class="remodal room modal-lg" data-remodal-id="modal">
+  <a data-remodal-action="close" class="remodal-close"></a>
+  <div class="modal-body">
+  </div>
+</div>

@@ -77,6 +77,21 @@ class Roombooking extends Admin_Controller
     $this->layout->view('frontend/roombooking/create');
   }
 
-    
+  public function room_status()
+  {
+    $this->data['result'] = $this->booking_model->get_room_status();
+    if($this->data['result'])
+    {
+      $data = $this->load->view("frontend/roombooking/room_status",$this->data,true);
+      $output['status'] = "success";
+      $output['msg'] = $data;
+    }
+    else
+    {
+      $output['status'] = "failed";
+      $output['msg'] = "No Records Found.";
+    }
+    $this->_ajax_output($output,TRUE);
+  }
 }
 ?>

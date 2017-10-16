@@ -95,6 +95,7 @@
          * @param {object} The input being clicked
          */
         showPicker: function (element) {
+          console.log(element);
             //If there is a beforeShow function, then call it with the input calling the timepicker and the
             // timepicker itself
             if (typeof this.options.beforeShow === 'function') {
@@ -212,7 +213,6 @@
          */
         attach: function (element) {
             var self = this;
-
             if (this.options.clearable) {
                 self.makePickerInputClearable(element);
             }
@@ -510,7 +510,7 @@
          * @param {object} The input element
          */
         setText: function (input) {
-            $(input).val(this.formatTime(this.selectedHour, this.selectedMin, this.selectedMeridiem, this.selectedSec)).change();
+          $(input).val(this.formatTime(this.selectedHour, this.selectedMin, this.selectedMeridiem, this.selectedSec)).change();
         },
 
         /*

@@ -76,10 +76,19 @@ class Taxi_model extends App_model {
         return $q->result_array();
     }
 
-    public function get_charge($table)
+    public function get_charge($where='',$table='')
     {
-        $q = $this->db->get($table);
-        return $q->row_array();
+      if($where!='')
+        $this->db->where($where);
+      $q = $this->db->get($table);
+      return $q->row_array();
+    }
+    public function get_profit_loss($where='',$table='')
+    {
+      if($where!='')
+        $this->db->where($where);
+      $q = $this->db->query("SELECT (sum(`grand_total`) - (sum(toll) + sum(parking) + sum(cgst) + sum(sgst))) as amt FROM `taxi_booking`");
+      return $q->row_array();
     }
     
 }

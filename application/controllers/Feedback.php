@@ -17,6 +17,8 @@ class Feedback extends Admin_Controller
   }  
   public function index()
   {
+    if(!is_logged_in())
+          redirect("home");
     $this->layout->set_title('Feedback');
     $this->layout->add_javascripts(array('listing'));
     $this->load->library('listing');
@@ -48,6 +50,7 @@ class Feedback extends Admin_Controller
       $ins['rank'] = $form['rank'];
       $ins['email'] = $form['email'];
       $ins['contact_no'] = $form['phone'];
+      $ins['room_id'] = $form['room_id'];
       $ins['comments'] = $form['comments'];
       if($edit_id)
       {
@@ -64,7 +67,7 @@ class Feedback extends Admin_Controller
     if($edit_id)
         $this->data['editdata'] = $this->feedback_model->get_where(array("id"=>$edit_id))->row_array();
     else
-      $this->data['editdata'] = array("id"=>"","name"=>"","rank"=>"","email"=>"","phone"=>"","comments"=>"");
+      $this->data['editdata'] = array("id"=>"","name"=>"","rank"=>"","email"=>"","phone"=>"","comments"=>"","room_id"=>"");
     $this->layout->view('frontend/feedback/contact');
   }
   function delete($del_id)

@@ -36,62 +36,77 @@
           <input class="form-control singledate" id="date" name="date" placeholder="" type="text" value="<?=set_value('date',$editdata['date']);?>" />
           <span class="error"><?=form_error('date')?></span>
   			</div>
-    		<div class="col-sm-4 <?=(form_error('from'))?'has-error':'';?>">
+        <div class="col-sm-4">
+          <label for="" class="control-label">Cost Centre</label><br />
+          <?php echo form_dropdown('cost_centre', array('' => '-None-','Personal' => 'Personal',"SMPL"=>"SMPL","SNPL"=>"SNPL","SYN OCEA"=>"SYN OCEA","FOOD ALE"=>"FOOD ALE","SYN MARINE"=>"SYN MARINE","SGO MANILA"=>"SGO MANILA","VESSEL"=>"VESSEL"), set_value('cost_centre', $editdata['cost_centre']), 'class="form-control width_select"');?>
+          <span class="error"><?=form_error('cost_centre')?></span>
+        </div>
+ 			</div>
+  		<div class="row">
+        <div class="col-sm-4 <?=(form_error('from'))?'has-error':'';?>">
           <label for="" class="control-label">From </label><br />
           <?php echo form_dropdown('from', array('' => '-None-')+get_locations(), set_value('from', $editdata['from_loc']), 'class="form-control width_select from_select"');?>
           <span class="error"><?=form_error('from')?></span>
-  			</div>
- 			</div>
-  		<div class="row">
+        </div>
   			<div class="col-sm-4 <?=(form_error('to'))?'has-error':'';?>">
         	<label for="" class="control-label">To</label><br />
           <?php echo form_dropdown('to', array('' => '-None-')+get_locations(), set_value('to', $editdata['to_loc']), 'class="form-control width_select to_select"');?>
           <span class="error"><?=form_error('to')?></span>
     		</div>
-        <div class="col-sm-4">
-          <label for="" class="control-label">Cost Centre</label><br />
-          <?php echo form_dropdown('cost_centre', array('' => '-None-','1' => '1',"2"=>"2"), set_value('cost_centre', $editdata['cost_centre']), 'class="form-control width_select"');?>
-          <span class="error"><?=form_error('cost_centre')?></span>
+        <div class="col-sm-4 <?=(form_error('rate'))?'has-error':'';?>">
+          <label for="" class="control-label">Charge Type * </label><br />
+          <label class="radio-inline">
+            <input type="radio" name="rate" value="Fixed" <?=(isset($editdata['rate']) && $editdata['rate']=="Yes")?"checked":'checked';?>>Fixed
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="rate" value="Normal" <?=(isset($editdata['rate']) && $editdata['rate']=="No")?"checked":'';?>>KM Charge
+          </label>
+          <span class="error"><?=form_error('rate')?></span>
         </div>
-    		<div class="col-sm-4 <?=(form_error('trip_sheet'))?'has-error':'';?>">
-          <label for="" class="control-label">Trip Sheet No </label><br />
-          <input class="form-control" id="date" name="trip_sheet" placeholder="" type="text" value="<?=set_value('trip_sheet',$editdata['trip_sheet']);?>" />
-          <span class="error"><?=form_error('trip_sheet')?></span>
-  			</div>
  			</div>
  			<div class="row">
-        <div class="col-sm-4">
-          <label for="" class="control-label">Waiting Charge</label><br />
-          <?php echo form_dropdown('waiting', array('' => '-None-','30' => '30 mins',"60"=>"1 hr","90"=>"1.30 hr","120"=>"2 hr","150"=>"2.30 hr"), set_value('waiting', $editdata['waiting']), 'class="form-control width_select waiting_charge"');?>
-          <span class="error"><?=form_error('waiting')?></span>
-        </div>
-    		<div class="col-sm-4 <?=(form_error('kms'))?'has-error':'';?>">
-        	<label for="" class="control-label">No.of KM</label><br />
-          <input class="form-control taxi_kms" id="date" name="kms" placeholder="" type="text" value="<?=set_value('kms',$editdata['kms']);?>" />
-          <span class="error"><?=form_error('kms')?></span>
-        </div>
         <div class="col-sm-4 <?=(form_error('day_type'))?'has-error':'';?>"">
-         	<label for="" class="control-label">Day/Night</label><br />
+          <label for="" class="control-label">Day/Night</label><br />
           <?php echo form_dropdown('day_type', array('' => '-None-','Day' => 'Day',"Night"=>"Night"), set_value('day_type', $editdata['day_type']), 'class="form-control width_select day_select"');?>
           <span class="error"><?=form_error('day_type')?></span>
         </div>
-   		</div>
-   		<div class="row">
+        <div class="col-sm-4 <?=(form_error('kms'))?'has-error':'';?>">
+          <label for="" class="control-label">No.of KM</label><br />
+          <input class="form-control taxi_kms" id="date" name="kms" placeholder="" type="text" value="<?=set_value('kms',$editdata['kms']);?>" />
+          <span class="error"><?=form_error('kms')?></span>
+        </div>
         <div class="col-sm-4 <?=(form_error('charge'))?'has-error':'';?>">
           <label for="" class="control-label">Charge</label><br />
           <input class="form-control taxi_charge" readonly type="text" name="charge" value="<?=set_value('charge',$editdata['charge']);?>">
           <span class="error"><?=form_error('charge')?></span>
+        </div>
+   		</div>
+   		<div class="row">
+        <div class="col-sm-4">
+          <label for="" class="control-label">Waiting Charge</label><br />
+          <?php echo form_dropdown('waiting', array('' => '-None-','30' => '30 mins',"60"=>"1 hr","90"=>"1.30 hr","120"=>"2 hr","150"=>"2.30 hr"), set_value('waiting', $editdata['waiting']), 'class="form-control width_select waiting_charge"');?>
+          <span class="error"><?=form_error('waiting')?></span>
         </div>
         <div class="col-sm-4">
           <label for="" class="control-label">Toll</label><br />
           <input class="form-control" id="date" name="toll" placeholder="" type="text" value="<?=set_value('toll',$editdata['toll']);?>" />
         </div>
         <div class="col-sm-4">
-         	<label for="" class="control-label">Parking</label><br />
+          <label for="" class="control-label">Parking</label><br />
           <input class="form-control" id="time" type="text" name="parking" value="<?=set_value('parking',$editdata['parking']);?>">
         </div>
    		</div>
       <Div class="row">
+        <div class="col-sm-4 <?=(form_error('discount'))?'has-error':'';?>">
+          <label for="" class="control-label">Discount %</label><br />
+          <input class="form-control" name="discount" type="text" value="<?=set_value('discount',$editdata['discount']);?>" />
+          <span class="error"><?=form_error('discount')?></span>
+        </div>
+        <div class="col-sm-4 <?=(form_error('trip_sheet'))?'has-error':'';?>">
+          <label for="" class="control-label">Trip Sheet No </label><br />
+          <input class="form-control" id="date" name="trip_sheet" placeholder="" type="text" value="<?=set_value('trip_sheet',$editdata['trip_sheet']);?>" />
+          <span class="error"><?=form_error('trip_sheet')?></span>
+        </div>
         <div class="col-sm-4 <?=(form_error('cash_received'))?'has-error':'';?>">
           <label for="" class="control-label">Cash Received * </label><br />
           <label class="radio-inline">

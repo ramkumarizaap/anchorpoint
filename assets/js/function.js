@@ -1,3 +1,15 @@
+$(window).scroll(function(){
+
+     if($(this).scrollTop() > 0 ){
+
+      $("body").removeClass("largelogo");
+      }
+     else{
+     $("body").addClass("largelogo");
+     }
+
+     });  
+
 $(document).ready(function(){
 	//$('a,button').tooltip();
 
@@ -12,11 +24,38 @@ $(document).ready(function(){
 	});
 $('.timepicker').wickedpicker();
    
-   $('.select2').select2();
+  $('.select2').select2();
+
+setTimeout(function(){
+  $(".booking_log th.sorting_disabled").each(function(i){
+    style = $(this).attr("style");
+    style = style.split(":");
+    $(this).css("min-width",style[1].replace(";",""));
+  });
+},3000);
+
+
+ $('#allinone_bannerRotator_classic').allinone_bannerRotator({
+                skin: 'classic',
+                width: 1900,
+                height: 746,
+                width100Proc:true,
+                showPreviewThumbs:false,
+                showAllControllers:true,
+                autoHideNavArrows:false,
+                autoHideBottomNav:false,
+                defaultEffect:'topBottomDiagonalBlocks',
+                responsive:true,
+                thumbsWrapperMarginBottom:5,
+                defaultEffect: 'random'
+            });     
+
+  
+
   $('.singledate').on('apply.daterangepicker', function(ev, picker) {
       $(this).val(picker.startDate.format('YYYY-MM-DD'));
   });
-
+$("#example1").DataTable({ "scrollY": 350,"scrollX": true,paging:false,searching:false,ordering:false,info:false});
 
   init_daterangepicker();
 
@@ -28,7 +67,7 @@ $("#pdfForm").dropzone({
     addRemoveLinks:true,
     acceptedFiles:"application/pdf",
     dictRemoveFile:"Remove",
-    dictDefaultMessage:"Drag or Drop pdf here",
+    dictDefaultMessage:"Drag or Drop pdf here<br>(Or)<br>Browse File (Click)",
     url:base_url+'booking/pdfupload',
     success:function(data)
     {
@@ -38,6 +77,11 @@ $("#pdfForm").dropzone({
         $("input[name='po_no']").val(data['po_no']);
         $("input[name='checkin_date']").val(data['checkin_date']);
         $("input[name='checkin_time']").val(data['checkin_time']);
+        if(data['checkout_date']!='' && data['checkout_time']!='')
+        {
+          $("input[name='checkout_date']").val(data['checkout_date']);
+          $("input[name='checkout_time']").val(data['checkout_time']);
+        }
         $("select[name='rank']").val(data['rank']).change();
         $("select[name='executive']").val(data['executive']).change();
         $("select[name='vessel']").val(data['vessel']).change();
@@ -149,6 +193,9 @@ $("#pdfForm").dropzone({
             $("form#ChargeForm .msg.last-msg").addClass(data.class);
             $("form#ChargeForm .msg.last-msg").html(data.msg);
             $("form#ChargeForm")[0].reset();
+            setTimeout(function(){
+              $("form#ChargeForm .msg.last-msg").html("");
+            },"3000");
           },
           error:function(data)
           {
@@ -158,22 +205,27 @@ $("#pdfForm").dropzone({
       }
   });
 
-  $("select.waiting_charge,input.taxi_kms,select.day_select").on('change keyup',function(){
+  $("select.waiting_charge,input.taxi_kms,select.day_select,input[name='rate'],form.bookingForm select[name='from'],form.bookingForm select[name='to']").on('change keyup click',function(){
     ch = $("input.taxi_charge");
     waiting = $("select.waiting_charge").val();
     kms = $("input.taxi_kms").val();
     day = $("select.day_select").val();
-    if(kms!="" && day!="")
+    rate = $("input[name='rate']:checked").val();
+    from = $("form.bookingForm select[name='from']").val();
+    to = $("form.bookingForm select[name='to']").val();
+    if(day!="")
     {
       $.ajax({
         type:"POST",
         url:base_url+"taxi/get_charge",
-        data:{waiting:waiting,kms:kms,day:day},
+        data:{waiting:waiting,kms:kms,day:day,rate:rate,from:from,to:to},
         success:function(data)
         {
-          // console.log(data);
+          console.log(data);
           data = JSON.parse(data);
           ch.val(data.amount);
+          if(rate=="Fixed")
+            $("input.taxi_kms").val(data.kms);
         },
         error:function(data)
         {
@@ -183,9 +235,28 @@ $("#pdfForm").dropzone({
     }
   });
 
+  $("form#ChargeForm .to_select,form#ChargeForm .from_select").change(function(){
+    from = $("form#ChargeForm .from_select").val();
+    to = $("form#ChargeForm .to_select").val();
+    $.ajax({
+      type:"POST",
+      url:base_url+"taxi/ajax_get_charge",
+      data:{from:from,to:to},
+      success:function(data)
+      {
+        if(data!='')
+        {
+          data = JSON.parse(data);
+          console.log(data);
+          $("form#ChargeForm input[name='kms']").val(data.kms);
+          $("form#ChargeForm input[name='fixed_day_charge']").val(data.day_charge);
+          $("form#ChargeForm input[name='fixed_night_charge']").val(data.night_charge);
+        }
+      }
+    });
+  });
 
-
- $("form.operationForm").submit(function(e){
+$("form.operationForm").submit(function(e){
   e.preventDefault();
   form = $(this).serializeArray();
   var val = $.map($('input[name="op_select[]"]:checked'), function(c){return c.value; })
@@ -209,6 +280,34 @@ $("#pdfForm").dropzone({
   });
  });
 
+$("form#executiveForm,form#rankForm,form#vesselForm,form#roomForm,form#addressForm,form#purposeForm,form#costForm").submit(function(e){
+  e.preventDefault();
+  form = $(this).serializeArray();
+  $.ajax({
+    type:"POST",
+    url:base_url+"services/add_services",
+    data:form,
+    success:function(data)
+    {
+      refresh_grid();
+      console.log(data);
+      console.log(form[0].value);
+      data = JSON.parse(data);
+      $("form#"+form[0].value).find(".msg").addClass(data.status);
+      $("form#"+form[0].value).find(".msg").html(data.msg);
+      $.fn.init_progress_bar();
+      $("form#"+form[0].value)[0].reset();
+      setTimeout(function(){
+        $("form#"+form[0].value).find(".msg").html("");
+      },3000);
+    },
+    error:function(data)
+    {
+      refresh_grid();
+    }
+  });
+});
+
 $("input[name='check-all']").click(function(){
   st = $(this).prop('checked');
   if(st)
@@ -225,6 +324,7 @@ $(".export-excel").click(function(){
     data:"",
     success:function(data)
     {
+      $("form#exportForm")[0].reset();
       console.log(data);
     },
     error:function(data)
@@ -234,8 +334,71 @@ $(".export-excel").click(function(){
   });
 });
 
-
 });	
+
+function get_status()
+{
+  $(".remodal.room .modal-body").html("<img src='"+base_url+"/assets/images/loading.gif'>");
+  $(".room_modal").trigger('click');
+  $.ajax({
+    type:"POST",
+    url:base_url+"roombooking/room_status",
+    data:"",
+    success:function(data)
+    {
+      console.log(data);
+      data = JSON.parse(data);
+      $(".remodal.room .modal-body").html(data.msg);
+    },
+    error:function(data)
+    {
+      console.log(data);
+    }
+  });
+}
+
+function get_services(ele)
+{
+  id = $(ele).attr("data-id");
+  table = $(ele).attr("data-table");
+  if(table=="executives")
+    form = $("form#executiveForm");
+  else if(table=="rank")
+    form = $("form#rankForm");
+  else if(table=="vessels")
+    form = $("form#vesselForm");
+  else if(table=="rooms")
+    form = $("form#roomForm");
+  else if(table=="invoice_address")
+    form = $("form#addressForm");
+  else if(table=="purpose")
+    form = $("form#purposeForm");
+  else if(table=="cost_centre")
+    form = $("form#costForm");
+   $.ajax({
+    type:"POST",
+    url:base_url+"services/get_services",
+    data:{id:id,table:table},
+    success:function(data)
+    {
+      console.log(data);
+      data = JSON.parse(data);
+      if(table=="invoice_address")
+        form.find("textarea[name='name']").val(data.address);
+      else
+        form.find("input[name='name']").val(data.name);
+      if(table=="rooms")
+        form.find("input[name='tariff']").val(data.tariff);
+      form.find("select[name='status']").val(data.status);
+      form.find("input[name='id']").val(data.id);
+    },
+    error:function(data)
+    {
+      refresh_grid();
+    }
+  });
+}
+
 function getFormatDate(d){
     return d.getMonth()+1 + '/' + d.getDate() + '/' + d.getFullYear()
 }

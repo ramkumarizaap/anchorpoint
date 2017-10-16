@@ -127,7 +127,10 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
             $data = humanize($data);
             break;
         case 'date':
+            if($data!='' && $data!='0000-00-00 00:00')
                 str2USDT($data);
+            else
+                $data = "";
             break;
         case 'datetime':
             $data = str2USDate($data);
@@ -147,24 +150,22 @@ function displayData($data = null, $type = 'string', $row = array(), $wrap_tag_o
         case 'word_money':
             $data = convert_number($data)." Rupees only";
         break;
+         case 'colorize':
+            if($row['checked_in']=="Yes")
+                $data = $data;
+            else
+                $data = "<span style=color:red>$data</span>";
+        break;
 
         case 'tablink':
             $data = '<a href="'.$data.'" target="_blank">'.$data.'</a>';
             break;    
-        case 'timesheet_type':
-        
-                if($data == 'Present')
-                    $type = 'btn-success';
-                elseif($data == 'Absent')
-                    $type = 'btn-danger';
-                elseif($data == 'Idle')
-                    $type = 'btn-warning';
-                elseif($data == 'Weekend')
-                    $type = 'btn-info';
-                elseif($data == 'Ramadan')
-                    $type = 'btn-primary';
-
-                $data = '<button type="button" class="'.$type.' btn-xs">'.$data.'</button>';    
+        case 'label':        
+                if($data == 'Active')
+                    $type = 'label-success';
+                elseif($data == 'Deactive')
+                    $type = 'label-danger';
+                $data = '<label class="label '.$type.'">'.$data.'</label>';
                 break;        
     }
     
@@ -178,10 +179,21 @@ function employee_status(){
     return $status;
 
 }
+function get_by_id($where='',$table='')
+{
+    $CI = & get_instance();
+    if($where)
+        $CI->db->where($where);
+    $result = $CI->db->get($table)->row_array();
+    $types = array();
+    $types['name'] = $result['name'];
+    return $types;
+}
 
 function get_executives()
 {
     $CI = & get_instance();
+    $CI->db->where("status","Active");
     $result = $CI->db->get('executives')->result_array();
     $types = array();$i=0;
     foreach ($result as $row) 
@@ -194,18 +206,20 @@ function get_executives()
 function get_rooms()
 {
     $CI = & get_instance();
+    $CI->db->where("status","Active");
     $result = $CI->db->get('rooms')->result_array();
     $types = array();$i=0;
-    foreach ($result as $row) 
+    foreach ($result as $row)
     {
-        $types[$row['id']] = $row['name'];
-        $i++;
+      $types[$row['id']] = $row['name'];
+      $i++;
     }
     return $types;
 }
 function get_address()
 {
     $CI = & get_instance();
+    $CI->db->where("status","Active");
     $result = $CI->db->get('invoice_address')->result_array();
     $types = array();$i=0;
     foreach ($result as $row) 
@@ -215,9 +229,36 @@ function get_address()
     }
     return $types;
 }
+function get_purpose()
+{
+    $CI = & get_instance();
+    $CI->db->where("status","Active");
+    $result = $CI->db->get('purpose')->result_array();
+    $types = array();$i=0;
+    foreach ($result as $row) 
+    {
+        $types[$row['id']] = $row['name'];
+        $i++;
+    }
+    return $types;
+}
+function get_cost_centre()
+{
+    $CI = & get_instance();
+    $CI->db->where("status","Active");
+    $result = $CI->db->get('cost_centre')->result_array();
+    $types = array();$i=0;
+    foreach ($result as $row) 
+    {
+        $types[$row['id']] = $row['name'];
+        $i++;
+    }
+    return $types;
+}
 function get_vessels()
 {
     $CI = & get_instance();
+    $CI->db->where("status","Active");
     $result = $CI->db->get('vessels')->result_array();
     $types = array();$i=0;
     foreach ($result as $row) 
@@ -230,6 +271,7 @@ function get_vessels()
 function get_ranks()
 {
     $CI = & get_instance();
+    $CI->db->where("status","Active");
     $result = $CI->db->get('rank')->result_array();
     $types = array();
     foreach ($result as $row) 

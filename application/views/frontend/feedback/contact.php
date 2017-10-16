@@ -25,6 +25,12 @@
 					    </div>
 					  </div>
 					  <div class="row">
+					    <div class="col-md-12 mb-3 <?=(form_error('room_id'))?'has-error':'';?>">
+					      <?php echo form_dropdown('room_id', array('' => '-None-')+get_rooms(), set_value('room_id', $editdata['room_id']), 'class="form-control width_select select2" data-placeholder="Room Name"');?>
+					      <span class="error"><?=form_error('room_id');?></span>
+					    </div>
+					  </div>
+					  <div class="row">
 					    <div class="col-md-6 mb-3 <?=(form_error('email'))?'has-error':'';?>">
 					      <input type="text" class="form-control" placeholder="Email" name="email" value="<?=set_value('email',$editdata['email']);?>">
 					      <span class="error"><?=form_error('email');?></span>
@@ -41,7 +47,7 @@
 				    	</div>
 				  	</div>
 	    			<div class="row">
-	      			<div class="col-md-5 mb-3"></div>ww
+	      			<div class="col-md-5 mb-3"></div>
 	    				<div class="col-md-2 mb-3">
 	      				<button class="btn btn-primary btn-block btn-lg" type="submit">SUBMIT</button>
 	    				</div>

@@ -30,31 +30,31 @@ $config['booking_logs'] = array(
 	"base_url"	=> 	'/booking/logs/',
 	"per_page"	=>	"10",
 	"fields"	=> array(   
-					'inv_no'=>array('name'=>'Invoice No', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'po_no'=>array('name'=>'Po No', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					// 'inv_no'=>array('name'=>'Invoice No', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'po_no'=>array('name'=>'Po No', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"5"),
 					'officer_name'=>array('name'=>'Officer Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'rank'=>array('name'=>'Rank', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'executive'=>array('name'=>'Booking Executive', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'purpose'=>array('name'=>'Purpose Of Visit', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'purpose'=>array('name'=>'Purpose of Visit', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'course_name'=>array('name'=>'Course Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'vessel'=>array('name'=>'Assigned Vessel', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'checkin_date'=>array('name'=>'Check In Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'checkin_date'=>array('name'=>'Checked In Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'checked_in'=>array('name'=>'Checked In', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'checkout_date'=>array('name'=>'Checkout Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'checkout_date'=>array('name'=>'Checked Out Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'occupancy'=>array('name'=>'Occupancy', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'room'=>array('name'=>'Room', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'lunch'=>array('name'=>'No.of Room Nights', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'tariff'=>array('name'=>'Room Tariff', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'breakfast'=>array('name'=>'Breakfast', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'lunch'=>array('name'=>'Lunch', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'snacks'=>array('name'=>'Snacks', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'printout'=>array('name'=>'Printout', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'laundry'=>array('name'=>'Laundry', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'logistics'=>array('name'=>'Logistics', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					// 'lunch'=>array('name'=>'Lunch', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					// 'tariff'=>array('name'=>'Room Tariff', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					// 'breakfast'=>array('name'=>'Breakfast', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					// 'snacks'=>array('name'=>'Snacks', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					// 'printout'=>array('name'=>'Printout', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					// 'laundry'=>array('name'=>'Laundry', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					// 'logistics'=>array('name'=>'Logistics', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'cost_centre'=>array('name'=>'Cost Centre', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'discount'=>array('name'=>'Discount Amt', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'invoice_amount'=>array('name'=>'Invoice Amt', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'invoice_link'=>array('name'=>'Invoice', 'data_type' => 'link', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-					'pdf_downloaded'=>array('name'=>'PDF Downloaded', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'pdf_downloaded'=>array('name'=>'PDF Downlaoded', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					),
 	"default_order"	=> "a.id",
 	"default_direction" => "DESC"
@@ -68,14 +68,15 @@ $config['room_status'] = array(
 	"base_url"	=> 	'/room/status/',
 	"per_page"	=>	"20",
 	"fields"	=> array(
-						'room'=>array('name'=>'Room', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+						'name'=>array('name'=>'Room', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 						'occupancy'=>array('name'=>'Type', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 						'officer_name'=>array('name'=>'Officer Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 						'rank'=>array('name'=>'Rank', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-						'checkin_date'=>array('name'=>'Check In Date', 'data_type' => 'date', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-						'e_checkout_date'=>array('name'=>'Expected Check Out', 'data_type'=> 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
-						'checked_in'=>array('name'=>'Checked In', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),),
-	"default_order"	=> "a.checkin_date",
+						'checkin_date'=>array('name'=>'Check In Date', 'data_type' => 'colorize', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+						'e_checkout_date'=>array('name'=>'Expected Check Out', 'data_type'=> 'date', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+						'checked_in'=>array('name'=>'Checked In', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+						'executive'=>array('name'=>'Executive', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>0,"width"=>"15"),),
+	"default_order"	=> "b.checkin_date",
 	"default_direction" => "desc"
 );
 
@@ -105,6 +106,7 @@ $config['taxi_logs'] = array(
 					'sgst'=>array('name'=>'SGST 2.5%', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'toll'=>array('name'=>'Toll', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'parking'=>array('name'=>'Parking', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'cost_centre'=>array('name'=>'Cost Centre', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'invoice_sent'=>array('name'=>'Invoice Sent', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'invoice_link'=>array('name'=>'Invoice Link', 'data_type' => 'link', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 					'cash_received'=>array('name'=>'Cash Received', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
@@ -126,10 +128,128 @@ $config['feedback_index'] = array(
 						'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),					
 						'rank'=>array('name'=>'Rank', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),					
 						'email'=>array('name'=>'Email', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+						'room_id'=>array('name'=>'Room Name','data_type'=> 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 						'contact_no'=>array('name'=>'Contact No','data_type'=> 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
 						'comments'=>array('name'=>'Comments', 'data_type' => 'string', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),),
 	"default_order"	=> "id",
 	"default_direction" => "desc"
 );
 
+
+
+
+$config['services_executives'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'services/filter',
+	"base_url"	=> 	'/services/executives/',
+	"per_page"	=>	"30",
+	"fields"	=> array(   
+					'id'=>array('name'=>'ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'status'=>array('name'=>'Status', 'data_type' => 'label', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+$config['services_rank'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'services/filter',
+	"base_url"	=> 	'/services/rank/',
+	"per_page"	=>	"30",
+	"fields"	=> array(   
+					'id'=>array('name'=>'ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'status'=>array('name'=>'Status', 'data_type' => 'label', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['services_vessels'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'services/filter',
+	"base_url"	=> 	'/services/vessels/',
+	"per_page"	=>	"30",
+	"fields"	=> array(   
+					'id'=>array('name'=>'ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'status'=>array('name'=>'Status', 'data_type' => 'label', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+$config['services_inv_address'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'services/filter',
+	"base_url"	=> 	'/services/inv_address/',
+	"per_page"	=>	"30",
+	"fields"	=> array(   
+					'id'=>array('name'=>'ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'address'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'status'=>array('name'=>'Status', 'data_type' => 'label', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['services_purpose'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'services/filter',
+	"base_url"	=> 	'/services/purpose/',
+	"per_page"	=>	"30",
+	"fields"	=> array(   
+					'id'=>array('name'=>'ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'status'=>array('name'=>'Status', 'data_type' => 'label', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+$config['services_cost_centre'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'services/filter',
+	"base_url"	=> 	'/services/cost_centre/',
+	"per_page"	=>	"30",
+	"fields"	=> array(   
+					'id'=>array('name'=>'ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'status'=>array('name'=>'Status', 'data_type' => 'label', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
+
+
+
+
+
+
+
+$config['services_rooms'] = array(
+	"view"		=> 	'listing/listing',
+	"init_scripts" => 'listing/init_scripts',
+	"advance_search_view" => 'services/filter',
+	"base_url"	=> 	'/services/rooms/',
+	"per_page"	=>	"30",
+	"fields"	=> array(   
+					'id'=>array('name'=>'ID', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'name'=>array('name'=>'Name', 'data_type' => 'String', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'tariff'=>array('name'=>'Tariff', 'data_type' => 'money', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					'status'=>array('name'=>'Status', 'data_type' => 'label', 'sortable' => FALSE, 'default_view'=>1,"width"=>"15"),
+					),
+	"default_order"	=> "id",
+	"default_direction" => "DESC"
+);
 

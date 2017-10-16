@@ -5,8 +5,8 @@ require_once(APPPATH."libraries/Admin_controller.php");
 class Login extends Admin_controller 
 {
     protected $_login_validation_rules =array (
-                                        array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required|valid_email'),
-                                        array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required|alpha_dash')
+                                        array('field' => 'email', 'label' => 'Email', 'rules' => 'trim|required'),
+                                        array('field' => 'password', 'label' => 'Password', 'rules' => 'trim|required')
                                       );
      protected $_reset_validation_rules =array (
                                         array('field' => 'npassword', 'label' => 'New Password', 'rules' => 'trim|required|alpha_dash'),

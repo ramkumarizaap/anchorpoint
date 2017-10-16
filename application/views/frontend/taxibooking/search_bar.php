@@ -1,3 +1,44 @@
+<form action="<?=base_url();?>taxi/export_excel" method="post" id="exportForm">
+  <div class="row">
+    <div class="col-sm-4">
+      <label for="">Fuel</label><br />
+      <input class="form-control" name="fuel" placeholder="Fuel" value="" type="text">
+    </div>
+    <div class="col-sm-4">
+      <label for="">Ola Clients</label><br />
+      <input class="form-control" name="ola_clients" placeholder="Ola Clients" value="" type="text">
+    </div>
+    <div class="col-sm-4">
+      <label for="">Maintenance</label><br />
+      <input class="form-control" name="maintainence" placeholder="Maintenance" value="" type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <label for="">Driver Salary</label><br />
+      <input class="form-control" name="driver_salary" placeholder="Driver Salary" value="" type="text">
+    </div>
+    <div class="col-sm-4">
+      <label for="">Miscellaneous</label><br />
+      <input class="form-control" name="miscallenous" placeholder="Miscellaneous" value="" type="text">
+    </div>
+    <div class="col-sm-4">
+      <label for="">Remarks</label><br />
+      <input class="form-control" name="remarks" placeholder="Remarks" value="" type="text">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button type="submit" class="pull-right btn btn-primary">Export Excel</button>
+    </div>
+    <input type="hidden" name="search_from_date" class="search_from_date">
+    <input type="hidden" name="search_to_date" class="search_to_date">
+    <input type="hidden" name="search_inv_no" class="search_inv_no">
+    <input type="hidden" name="search_officer_name" class="search_officer_name">
+    <input type="hidden" name="search_driver_name" class="search_driver_name">
+    <input type="hidden" name="search_trip_sheet" class="search_trip_sheet">
+  </div>
+</form>
 <form id="simple_search_form">
   <!-- /.row --> 
   <div class="row b-chech-in-out">
@@ -42,19 +83,7 @@
   </div>
 </form>
 <br>
-<form action="<?=base_url();?>taxi/export_excel" method="post">
-  <div class="row">
-    <div class="col-md-12">
-      <button type="submit" class="pull-right btn btn-primary">Export Excel</button>
-    </div>
-    <input type="hidden" name="search_from_date" class="search_from_date">
-    <input type="hidden" name="search_to_date" class="search_to_date">
-    <input type="hidden" name="search_inv_no" class="search_inv_no">
-    <input type="hidden" name="search_officer_name" class="search_officer_name">
-    <input type="hidden" name="search_driver_name" class="search_driver_name">
-    <input type="hidden" name="search_trip_sheet" class="search_trip_sheet">
-  </div>
-</form>
+
 
 
 <!-- <form method="post" action="" name="operationForm" class="operationForm">

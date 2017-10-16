@@ -3,6 +3,7 @@
 $uri = $this->uri->segment(1);
 $uri1 = $this->uri->segment(2);
 $data = is_logged_in();
+$user = $this->session->userdata("user_data");
 ?>
 <section class="header clearfix">
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -29,20 +30,50 @@ $data = is_logged_in();
           if($data)
           {
             ?>
+            <?php
+                if($user['role']=="1" || $user['role']=="2"){?>
               <li class="nav-item <?=($uri=='booking' && $uri1=="create")?"main-menu-active":"";?> ">
                 <a class="nav-link " href="<?=base_url();?>booking/create">Book a Room</a>
               </li>
+              <?php }?>
+              <?php
+                if($user['role']=="1" || $user['role']=="2" || $user['role']=="3" || $user['role']=="4"){?>
               <li class="nav-item <?=($uri=='booking' && $uri1=="logs")?"main-menu-active":"";?>">
                 <a class="nav-link" href="<?=base_url();?>booking/logs">Room Booking Log</a>
               </li>
+              <?php }?>
+              <?php
+                if($user['role']=="1" || $user['role']=="2"){?>
               <li class="nav-item <?=($uri=='taxi' && ($uri1=="logs" || $uri1=="create"))?"main-menu-active":"";?> ">
                 <a class="nav-link " href="<?=base_url();?>taxi/logs">Book a Taxi</a>
               </li>
+              <?php }?>
+              <?php
+                if($user['role']=="1" || $user['role']=="2" || $user['role']=="4" || $user['role']=="5"){?>
               <li class="nav-item <?=($uri=='room' && $uri1=="status")?"main-menu-active":"";?>">
                 <a class="nav-link " href="<?=base_url();?>room/status">Room Status</a>
               </li>
+              <?php }?>
+              <?php
+                if($user['role']=="1" || $user['role']=="2" || $user['role']=="4" || $user['role']=="5"){?>
               <li class="nav-item <?=($uri=='feedback' && $uri1!="contact")?"main-menu-active":"";?>">
                 <a class="nav-link " href="<?=base_url();?>feedback">All Feedback</a> </li>
+              <?php }?>
+                <?php
+                if($user['role']=="1"){?>
+              <li class="nav-item <?=($uri=='services')?"main-menu-active":"";?>">
+                <a class="nav-link " href="<?=base_url();?>services">Services</a>
+                <ul>
+                  <li class="<?=($uri=='services' && $uri1=="rooms")?"active":"";?>"><a href="<?=base_url();?>services/rooms">Manage Rooms</a></li>
+                  <li class="<?=($uri=='services' && $uri1=="executives")?"active":"";?>"><a href="<?=base_url();?>services/executives">Manage Executives</a></li>
+                  <li class="<?=($uri=='services' && $uri1=="rank")?"active":"";?>"><a href="<?=base_url();?>services/rank">Manage Rank</a></li>
+                  <li class="<?=($uri=='services' && $uri1=="vessels")?"active":"";?>"><a href="<?=base_url();?>services/vessels">Manage Vessels</a></li>
+                  <li class="<?=($uri=='services' && $uri1=="inv_address")?"active":"";?>"><a href="<?=base_url();?>services/inv_address">Manage Inv Address</a></li>
+                  <li class="<?=($uri=='services' && $uri1=="purpose")?"active":"";?>"><a href="<?=base_url();?>services/purpose">Manage Purpose</a></li>
+                  <li class="<?=($uri=='services' && $uri1=="cost_centre")?"active":"";?>"><a href="<?=base_url();?>services/cost_centre">Manage Cost Centre</a></li>
+                </ul>
+              </li>
+              <?php }?>
               <li class="nav-item"> <a class="nav-link " href="<?=base_url();?>login/logout"> Logout</a></li>
               <?php
             }

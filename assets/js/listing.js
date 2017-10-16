@@ -179,9 +179,7 @@
 			
 			$.post(url,listing_form_data,function(rdata){
 				$("#"+data_tbl).parent().html(rdata.listing);
-				
 				$( "#"+data_tbl ).zoomgrid(opts);
-
 				$(".checkbox").checkboxradio({ icon: false });
 
 				init_daterangepicker();

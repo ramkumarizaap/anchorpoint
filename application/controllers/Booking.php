@@ -5,27 +5,27 @@ require_once(APPPATH."libraries/Admin_controller.php");
 class Booking extends Admin_Controller 
 {
 	protected $_booking_validation_rules = array (
-                                    array('field' => 'po_no', 'label' => 'Purchase Order No', 'rules' => 'trim|required'),
-                                    array('field' => 'officer_name', 'label' => 'Officer Name', 'rules' => 'trim|required'),
-                                    array('field' => 'rank', 'label' => 'Rank', 'rules' => 'trim|required'),
-                                    array('field' => 'executive', 'label' => 'Booking Executive', 'rules' => 'trim|required'),
-                                    array('field' => 'occupancy', 'label' => 'Occupancy', 'rules' => 'trim|required'),
-                                    array('field' => 'room_name', 'label' => 'Room Name', 'rules' => 'trim|required'),
-                                    array('field' => 'purpose', 'label' => 'Purpose of Visit', 'rules' => 'trim|required'),
-                                    array('field' => 'vessel', 'label' => 'Assigned Vessel', 'rules' => 'trim|required'),
-                                    array('field' => 'course_name', 'label' => 'Course Name', 'rules' => 'trim|required'),
-                                    array('field' => 'checkin_date', 'label' => 'Checkin Date', 'rules' => 'trim|required'),
-                                    array('field' => 'checkin_time', 'label' => 'Checkin Time', 'rules' => 'trim|required'),
-                                    array('field' => 'checkout_date', 'label' => 'Checkout Date', 'rules' => 'trim|required'),
-                                    array('field' => 'checkout_time', 'label' => 'Checkout Time', 'rules' => 'trim|required'),
+                                    array('field' => 'po_no', 'label' => 'Purchase Order No', 'rules' => 'trim'),
+                                    array('field' => 'officer_name', 'label' => 'Officer Name', 'rules' => 'trim'),
+                                    array('field' => 'rank', 'label' => 'Rank', 'rules' => 'trim'),
+                                    array('field' => 'executive', 'label' => 'Booking Executive', 'rules' => 'trim'),
+                                    array('field' => 'occupancy', 'label' => 'Occupancy', 'rules' => 'trim'),
+                                    array('field' => 'room_name', 'label' => 'Room Name', 'rules' => 'trim'),
+                                    array('field' => 'purpose', 'label' => 'Purpose of Visit', 'rules' => 'trim'),
+                                    array('field' => 'vessel', 'label' => 'Assigned Vessel', 'rules' => 'trim'),
+                                    array('field' => 'course_name', 'label' => 'Course Name', 'rules' => 'trim'),
+                                    array('field' => 'checkin_date', 'label' => 'Checkin Date', 'rules' => 'trim'),
+                                    array('field' => 'checkin_time', 'label' => 'Checkin Time', 'rules' => 'trim'),
+                                    array('field' => 'checkout_date', 'label' => 'Checkout Date', 'rules' => 'trim'),
+                                    array('field' => 'checkout_time', 'label' => 'Checkout Time', 'rules' => 'trim'),
                                     array('field' => 'e_checkout_date', 'label' => 'Expected Checkout Date', 'rules' => 'trim'),
-                                    array('field' => 'e_checkout_time', 'label' => 'Expected Checkout Time', 'rules' => 'trim'),                                    
+                                    array('field' => 'e_checkout_time','label' => 'Expected Checkout Time','rules' =>'trim'),
                                     array('field' => 'breakfast', 'label' => 'Breakfast', 'rules' => 'trim'),
                                     array('field' => 'lunch', 'label' => 'Lunch', 'rules' => 'trim'),
                                     array('field' => 'snacks', 'label' => 'Snacks', 'rules' => 'trim'),
                                     array('field' => 'printout', 'label' => 'Printout', 'rules' => 'trim'),
                                     array('field' => 'laundry', 'label' => 'Laundry', 'rules' => 'trim'),
-                                    array('field'=>'inv_address','label'=>'Invoice Ref. Address', 'rules' => 'trim|required'),
+                                    array('field'=>'inv_address','label'=>'Invoice Ref. Address', 'rules' => 'trim'),
                                     array('field' => 'checked_in', 'label' => 'Checked In', 'rules' => 'trim|required'),
                                     array('field' => 'logistics', 'label' => 'Logistics', 'rules' => 'trim'),
                                   );
@@ -35,6 +35,8 @@ class Booking extends Admin_Controller
         parent::__construct();          
         $this->load->model('booking_model');
         $this->load->library("pdf");
+        if(!is_logged_in())
+          redirect("home");
     }  
 
     public function index()
@@ -74,6 +76,7 @@ class Booking extends Admin_Controller
 
 	      $ins['breakfast'] = $form['breakfast'];
 	      $ins['lunch'] = $form['lunch'];
+        $ins['cost_centre'] = $form['cost_centre'];
 	      $ins['snacks'] = $form['snacks'];
 	      $ins['laundry'] = $form['laundry'];
 	      $ins['inv_address_id'] = $form['inv_address'];
@@ -184,23 +187,107 @@ class Booking extends Admin_Controller
       return $pdfpath;
     }
 
+    // public function pdfupload()
+    // {
+    //   $path = $this->do_upload()['upload_data']['file_name'];
+    //   $res = $this->ExtractTextFromPdf("assets/pdf/".$path)[0];
+    //   $q = array();$i=0;
+    //   $q['checkout_date'] = "";
+    //   $q['checkout_time'] = "";
+    //   $q['vessel'] = get_ajax_row_id(array("name"=>$res['11']),"vessels");
+    //   $q['po_no'] = $res['8'];
+    //   $a = explode(" ",$res['14']);
+    //   $date = explode("/",$a[0]);
+    //   $checkindate = date("Y-m-d",strtotime($date[0]."-".$date[1]."-".$date[2]));
+    //   $checkintime = date("H:i",strtotime($a[1]));
+    //   $q['checkin_date'] = $checkindate;
+    //   $q['checkin_time'] = $checkintime;
+    //   $d2 = strtotime($res['17'])?"true":"false";
+    //   if($d2=="true")
+    //   {
+    //     $i = $i + 1;
+    //     $b = explode(" ",$res['17']);
+    //     $date1 = explode("/",$b[0]);
+    //     $checkoutdate = date("Y-m-d",strtotime($date1[0]."-".$date1[1]."-".$date1[2]));
+    //     $checkoutime = date("H:i",strtotime($b[1]));
+    //     $q['checkout_date'] = $checkoutdate;
+    //     $q['checkout_time'] = $checkoutime;
+    //   }
+    //   $num = is_numeric($res[18+$i])?"true":"false";
+    //   if($num=="true")
+    //   {
+    //     $i = $i+1;
+    //   }
+    //   $q['rank'] = get_ajax_row_id(array("name"=>$res[27+$i]),"rank");
+    //   $q['officer_name'] = trim($res[26+$i]," ");
+    //   $exe = explode(":",$res[34+$i]);
+    //   $q['executive'] = get_ajax_row_id(array("name"=>trim($exe['1'])),"executives");
+    //   unlink("assets/pdf/".$path);
+    //   echo json_encode($q);
+    // }
     public function pdfupload()
     {
       $path = $this->do_upload()['upload_data']['file_name'];
-      $res = $this->ExtractTextFromPdf("assets/pdf/".$path)[0];
-      $q = array();
-      $q['vessel'] = get_ajax_row_id(array("name"=>$res['11']),"vessels");
-      $q['rank'] = get_ajax_row_id(array("name"=>$res['27']),"rank");
-      $q['officer_name'] = trim($res['26']);
-      $q['po_no'] = $res['8'];
-      $a = explode(" ",$res['14']);
-      $date = explode("/",$a[0]);
+      $formats = array("d/m/Y H:i", "d/M/Y H:i");
+      $a = $this->ExtractTextFromPdf("assets/pdf/".$path);
+      $q = array();$i=0;
+      $d = 0;
+      $checkout_date= "";$p="";$rank="";
+      foreach ($a[0] as $key => $value)
+      {
+        if (strpos($value, 'Order By') !== false)
+        {
+          $exe = explode(":",$value);
+          $executive = trim($exe[1]);
+        }
+        if (strpos($value, 'PO/') !== false)
+        {
+          $po = $value;
+          $p = $key;
+        }
+        
+        foreach ($formats as $format)
+        {
+          $date = DateTime::createFromFormat($format, $value);
+          if ($date == true)
+          {
+            if($d==0)
+            {
+              $checkin_date = $value;
+              $d = 1;
+            }
+            else if($d==1)
+              $checkout_date = $value;
+          }
+        }
+        if(isset($p) && $p!='')
+          $vessel = $a[0][$p+3];
+        if (strpos($value, 'Crew code') !== false)
+          $rank = $a[0][$key+4];
+        if (strpos($value, 'Crew name') !== false)
+          $officer = $a[0][$key+6];
+      }
+      $q['vessel'] = get_ajax_row_id(array("name"=>$vessel),"vessels");
+      $q['po_no'] = $po;
+      $ct = explode(" ",$checkin_date);
+      $date = explode("/",$checkin_date);
       $checkindate = date("Y-m-d",strtotime($date[0]."-".$date[1]."-".$date[2]));
-      $checkintime = date("H:i",strtotime($a[1]));
+      $checkintime = date("h:i",strtotime($ct[1]));
       $q['checkin_date'] = $checkindate;
       $q['checkin_time'] = $checkintime;
-      $exe = explode(":",$res['34']);
-      $q['executive'] = get_ajax_row_id(array("name"=>trim($exe['1'])),"executives");
+      if($checkout_date!='')
+      {
+        $b = explode(" ",$checkout_date);
+        $date1 = explode("/",$b[0]);
+        $checkoutdate = date("Y-m-d",strtotime($date1[0]."-".$date1[1]."-".$date1[2]));
+        $checkoutime = date("H:i",strtotime($b[1]));
+        $q['checkout_date'] = $checkoutdate;
+        $q['checkout_time'] = $checkoutime;
+      }
+      $q['rank'] = get_ajax_row_id(array("name"=>$rank),"rank");
+      $q['officer_name'] = trim($officer," ");
+      $q['executive'] = get_ajax_row_id(array("name"=>trim($executive)),"executives");
+      unlink("assets/pdf/".$path);
       echo json_encode($q);
     }
     public function do_upload()

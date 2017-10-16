@@ -10,11 +10,11 @@
     <?php display_flashmsg($this->session->flashdata()); ?>
     <div class="inner-page">    
       <!-- Three columns of text below the carousel -->
-      <div class="row pad-bot">
+     <!--  <div class="row pad-bot">
         <div class="col-sm-12">
           <a href="<?=base_url();?>room/create/" class="btn btn-danger">Create Room</a>
         </div>
-      </div>
+      </div> -->
       <?=$grid;?>
     </div>
     <!-- /.row --> 

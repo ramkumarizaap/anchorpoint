@@ -4,8 +4,10 @@ $total =  $invoice['charge'];
 <table width="100%" border="1" cellspacing="0" cellpadding="0" class="billing-cztm-t1 invoicetable" >
   <tr style="background: #fff;border: 1px solid black;border-bottom: none; ">
     <td style="padding: 5px;" colspan="6" align="center" valign="middle">
-      <h6 style="font-size:1.40rem;padding-top: 12px;">ANCHORPOINT HOSPITALITY PRIVATE LIMITED</h6>
-    </td>
+          <img src="<?=base_url();?>assets/images/logo.png" style="height: 70px;width: 70px;vertical-align: top;">
+          <h6 style="font-size:1.40rem;padding-top: 12px;display: inline-block;margin: 0 auto;">ANCHORPOINT HOSPITALITY PRIVATE LIMITED
+            <br><small style="float: right;font-size: 14px;font-style: italic;margin-right: 10px;">Your Own Space</small></h6>
+        </td>
   </tr>
   <tr align="center" style="background: rgb(227, 224, 255);border: 1px solid #000;border-top: none;border-bottom: none;">
     <td style="padding: 5px;font-size: 12px;" colspan="6" align="center" valign="middle">3A,3B & 3C Aiswarya Prapancha Apartments, Madha Koil Street, Thoraipakkam,Chennai.</td>
@@ -25,35 +27,35 @@ $total =  $invoice['charge'];
   </tr>
   <tr align="left" style="padding: 0 !important;border-top: 1px solid #000;border-bottom: none;">
     <td style="font-size: 10px;;padding: 5px;border-right: none;border-bottom: none;" width="15%" align="left" valign="middle">Invoice Date </td>
-    <td style="font-size: 10px;padding: 5px;border-left: none;border-right:1px solid #000;border-bottom: none; " width="17%" align="left" valign="middle">31 July 2017 </td>
+    <td style="font-size: 10px;padding: 5px;border-left: none;border-right:1px solid #000;border-bottom: none; " width="17%" align="left" valign="middle"><?=date("d M Y",strtotime($invoice['created_date']));?></td>
     <td style="font-size: 10px;padding: 5px;border-right: none;border-bottom: none;" width="12%" align="left" valign="middle">GSTIN </td>
     <td style="font-size: 10px;padding: 5px;border-left: none;border-right:1px solid #000;border-bottom: none;" width="25%" align="left" valign="middle">33AAUCS6460K1ZQ</td>
     <td style="font-size: 10px;padding: 5px;border-right: none;border-bottom: none;" width="11%" align="left" valign="middle">Guest name</td>
-    <td style="font-size: 10px;padding: 5px;border-left: none;border-bottom: none;" width="20%" align="left" valign="middle">Sandeep Kumar Chowdhary</td>
+    <td style="font-size: 10px;padding: 5px;border-left: none;border-bottom: none;" width="20%" align="left" valign="middle"><?=$invoice['officer_name'];?></td>
   </tr>
   <tr style="border-top: none;border-bottom: none;">
     <td style="font-size: 10px;border-right:none;border-top: none;border-bottom:none;padding: 5px;" align="left" valign="middle">Invoice No</td>
-    <td style="font-size: 10px;border-left: none;border-top: none;border-bottom:none;padding: 5px;" align="left" valign="middle">APH-1718-INV-517</td>
+    <td style="font-size: 10px;border-left: none;border-top: none;border-bottom:none;padding: 5px;" align="left" valign="middle"><?=$invoice['inv_no'];?></td>
     <td style="font-size: 10px;border-top: none;border-right:none;border-bottom:none;padding: 5px;" align="left" valign="middle">Billed to </td>
     <td style="font-size: 10px;border-top: none;border-left:none;border-bottom:none;padding: 5px;" align="left" valign="middle">Synergy Maritime Recruitment</td>
     <td style="font-size: 10px;border-top: none;border-right:none;border-bottom:none;padding: 5px;" align="left" valign="middle">Rank</td>
-    <td style="font-size: 10px;border-top: none;border-left:none;border-bottom:none;padding: 5px;" align="left" valign="middle">C/O</td>
+    <td style="font-size: 10px;border-top: none;border-left:none;border-bottom:none;padding: 5px;" align="left" valign="middle"><?=get_by_id(array('id'=>$invoice['rank']),"rank")['name'];?></td>
   </tr>
   <tr style="border-top: none;border-bottom: none;">
     <td style="font-size: 10px;border-right:none;border-top: none;border-bottom:none;padding: 5px;" align="left" valign="middle">State of Supply & State code</td>
     <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-left: none;" align="left" valign="middle">Tamil Nadu & 33</td>
     <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
     <td style="font-size: 10px;padding: 5px;border-bottom:none;border-left: none;border-top: none;" align="left" valign="middle">Services Private Limited,  3/381 Rajiv Gandhi Salai,  Mettukuppam; Chennai,  600097, Chennai Tamil Nadu </td>
-    <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-right: none;" align="left" valign="middle">Type of Room</td>
-    <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-left: none;" align="left" valign="middle">Single</td>
+    <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">Vessel Name</td>
+    <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle"><?=get_by_id(array('id'=>$invoice['vessel']),"vessels")['name'];?></td>
   </tr>
   <tr style="border-top: none;border-bottom: none;">
     <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">GSTIN </td>
     <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">33AAMCA9719R1ZU</td>
     <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
     <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
-    <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">Vessel Name</td>
-    <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">TBD</td>
+    <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+    <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
   </tr>
   <tr style="border-top: none;border-bottom: none;">
     <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
@@ -75,6 +77,7 @@ $total =  $invoice['charge'];
 <td width="3%" valign="middle"><strong>UOM</strong></td>
 <td width="6%" valign="middle"><strong>Rate </strong></td>
 <td width="8%" valign="middle"><strong>Rs.</strong></td>
+<td width="4%" valign="middle"><strong>Discount</strong></td>
 <td width="4%" valign="middle"><strong>Toll</strong></td>
 <td width="4%" valign="middle"><strong>Parking</strong></td>
 <td width="9%" valign="middle"><strong>Taxable  value </strong></td>
@@ -88,6 +91,7 @@ $total =  $invoice['charge'];
 <td valign="middle"><strong>&nbsp;</strong></td>
 <td valign="middle">&nbsp;</td>
 <td align="center" valign="middle">&nbsp;</td>
+<td align="right" valign="middle">&nbsp;</td>
 <td align="right" valign="middle">&nbsp;</td>
 <td align="right" valign="middle">&nbsp;</td>
 <td align="right" valign="middle">&nbsp;</td>
@@ -108,6 +112,7 @@ $total =  $invoice['charge'];
 <td align="center" valign="middle">95</td>
 <td align="right" valign="middle"><?=displayData($invoice['charge'],"money");?></td>
 <td align="right" valign="middle"><?=displayData($total,"money");?></td>
+<td align="right" valign="middle"><?=$dis=$invoice['discount'];?></td>
 <td align="right" valign="middle"><?=$toll=displayData($invoice['toll'],"money");?></td>
 <td align="right" valign="middle"><?=$parking=displayData($invoice['parking'],"money");?></td>
 <td align="right" valign="middle"><?=displayData($total+$toll+$parking,"money");?>
@@ -115,14 +120,15 @@ $total =  $invoice['charge'];
 <td align="right" valign="middle">6% </td>
 <td align="right" valign="middle">
   <?php
-    $cgst=(($total+$toll+$parking) / 100 ) * 6;
+    $discount = ($total / 100 ) * $dis;
+    $cgst=((($total+$toll+$parking) - $discount) / 100 ) * 6;
     echo displayData($cgst,"money");
   ?>
 </td>
 <td align="right" valign="middle">6%</td>
 <td align="right" valign="middle">
   <?php
-    $sgst=(($total+$toll+$parking) / 100 ) * 6;
+    $sgst=((($total+$toll+$parking) - $discount) / 100 ) * 6;
     echo displayData($sgst,"money");
   ?>
 </td>
@@ -130,7 +136,7 @@ $total =  $invoice['charge'];
 <td align="right" valign="middle">-</td>
 <td align="right" valign="middle">
   <?php
-    $r_total = $total + $cgst + $sgst+$toll+$parking;
+    $r_total = ($total + $cgst + $sgst+$toll+$parking) - $discount;
     echo displayData(ceil($r_total),"money");
   ?>
 </td>
@@ -147,6 +153,11 @@ $total =  $invoice['charge'];
   </strong>
 </td>
 <td align="right" valign="middle">
+  <strong>
+    <?php echo displayData($discount,"money");?>
+  </strong>
+</td>
+<td align="right" valign="middle">
   <?php
       echo displayData($toll,"money");
     ?>
@@ -159,15 +170,16 @@ $total =  $invoice['charge'];
 <td align="right" valign="middle">
   <strong>
     <?php
-      echo displayData($total+$toll+$parking,"money");
+      echo displayData(($total+$toll+$parking) - $discount,"money");
     ?>
   </strong>
 </td>
+
 <td align="right" valign="middle">&nbsp;</td>
 <td align="right" valign="middle">
   <strong>
      <?php
-        $cgst=(($total+$toll+$parking) / 100 ) * 6;
+        $cgst=((($total+$toll+$parking) - $discount) / 100 ) * 6;
         echo displayData($cgst,"money");
       ?>
   </strong>
@@ -176,7 +188,7 @@ $total =  $invoice['charge'];
 <td align="right" valign="middle">
   <strong>
      <?php
-        $sgst=(($total+$toll+$parking) / 100 ) * 6;
+        $sgst=((($total+$toll+$parking) - $discount) / 100 ) * 6;
         echo displayData($sgst,"money");
       ?>
   </strong>
@@ -186,7 +198,7 @@ $total =  $invoice['charge'];
 <td align="right" valign="middle">
   <strong>
     <?php
-      $r_total = $total + $cgst + $sgst + $toll+$parking;
+      $r_total = ($total + $cgst + $sgst + $toll + $parking ) - $discount;
       echo displayData(ceil($r_total),"money");
     ?>
   </strong>
@@ -194,13 +206,13 @@ $total =  $invoice['charge'];
 </tr>
 <tr>
 <td align="right" valign="middle">&nbsp;</td>
-<td colspan="9" valign="bottom" style="padding: 5px;">
+<td colspan="10" valign="bottom" style="padding: 5px;">
   <p>Amount in Words(Rs.) <strong><?=displayData(ceil($r_total),"word_money");?></strong> </p>
 </td>
 <td colspan="6" rowspan="2" valign="middle"><table width="200" border="1" align="right" cellpadding="0" cellspacing="0">
   <tr>
     <td width="109" align="left">Taxable Value</td>
-    <td width="85" align="right"><strong><?=displayData($total+$toll+$parking,"money");?></strong></td>
+    <td width="85" align="right"><strong><?=displayData(($total+$toll+$parking) - $discount,"money");?></strong></td>
   </tr>
   <tr>
     <td align="left">CGST</td>
@@ -225,7 +237,7 @@ $total =  $invoice['charge'];
 </table></td>
 </tr>
 <tr>
-<td height="106" colspan="10"><strong>BENEFICIARY BANK DETAILS:</strong> ANCHORPOINT HOSPITALITY SERVICES PRIVATE LIMITED.   Axis Bank, Thoraipakkam Branch, Plot No. 172 - 173, Chandrasekaran Avenue, Old  Mahaballipurm Road, Okkiyam Thuraipakkam, Chennai, Tamil Nadu, Pin 600097. Bank A.c  No: 914020052063794 IFSC CODE: UTIB0 001566 SWIFT CODE: AXISBBA75</td>
+<td height="106" colspan="11"><strong>BENEFICIARY BANK DETAILS:</strong> ANCHORPOINT HOSPITALITY SERVICES PRIVATE LIMITED.   Axis Bank, Thoraipakkam Branch, Plot No. 172 - 173, Chandrasekaran Avenue, Old  Mahaballipurm Road, Okkiyam Thuraipakkam, Chennai, Tamil Nadu, Pin 600097. Bank A.c  No: 914020052063794 IFSC CODE: UTIB0 001566 SWIFT CODE: AXISBBA75</td>
 </tr>
 </table>
 </div>

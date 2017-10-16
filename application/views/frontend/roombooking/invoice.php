@@ -5,93 +5,95 @@
   $total = $days * $invoice['tariff'];
 ?>
 
-            <table width="100%" border="1" cellspacing="0" cellpadding="0" class="billing-cztm-t1 invoicetable" >
-              <tr style="background: #fff;border: 1px solid black;border-bottom: none; ">
-                <td style="padding: 5px;" colspan="6" align="center" valign="middle">
-                  <h6 style="font-size:1.40rem;padding-top: 12px;">ANCHORPOINT HOSPITALITY PRIVATE LIMITED</h6>
-                </td>
-              </tr>
-              <tr align="center" style="background: rgb(227, 224, 255);border: 1px solid #000;border-top: none;border-bottom: none;">
-                <td style="padding: 5px;font-size: 12px;" colspan="6" align="center" valign="middle">3A,3B & 3C Aiswarya Prapancha Apartments, Madha Koil Street, Thoraipakkam,Chennai.</td>
-              </tr>
-              <tr align="center" style="border: 1px solid #000;border-top: none;border-bottom: none;">
-                <td style="padding: 5px;font-size: 12px;" colspan="6" align="center" valign="middle">
-                  <strong>CIN - U55101KA2014PTC076899</strong>
-                </td>
-              </tr>
-              <tr align="center" style="background: rgb(227, 224, 255);">
-                <td style="padding: 5px;font-size: 12px;" colspan="6" align="center" valign="middle"> <strong>INVOICE</strong></td>
-              </tr>
-              <tr style="">
-                <td style="padding: 5px;" colspan="2" align="center" valign="middle"><strong>Invoice Details</strong></td>
-                <td style="padding: 5px;" colspan="2" align="center" valign="middle"><strong>Details of Receiver / Billed to</strong> </td>
-                <td style="padding: 5px;" colspan="2" align="center" valign="middle"><strong>Details</strong></td>
-              </tr>
-              <tr align="left" style="padding: 0 !important;border-top: 1px solid #000;border-bottom: none;">
-                <td style="font-size: 10px;;padding: 5px;border-right: none;border-bottom: none;" width="15%" align="left" valign="middle">Invoice Date </td>
-                <td style="font-size: 10px;padding: 5px;border-left: none;border-right:1px solid #000;border-bottom: none; " width="17%" align="left" valign="middle">31 July 2017 </td>
-                <td style="font-size: 10px;padding: 5px;border-right: none;border-bottom: none;" width="12%" align="left" valign="middle">GSTIN </td>
-                <td style="font-size: 10px;padding: 5px;border-left: none;border-right:1px solid #000;border-bottom: none;" width="25%" align="left" valign="middle">33AAUCS6460K1ZQ</td>
-                <td style="font-size: 10px;padding: 5px;border-right: none;border-bottom: none;" width="11%" align="left" valign="middle">Guest name</td>
-                <td style="font-size: 10px;padding: 5px;border-left: none;border-bottom: none;" width="20%" align="left" valign="middle">Sandeep Kumar Chowdhary</td>
-              </tr>
-              <tr style="border-top: none;border-bottom: none;">
-                <td style="font-size: 10px;border-right:none;border-top: none;border-bottom:none;padding: 5px;" align="left" valign="middle">Invoice No</td>
-                <td style="font-size: 10px;border-left: none;border-top: none;border-bottom:none;padding: 5px;" align="left" valign="middle">APH-1718-INV-517</td>
-                <td style="font-size: 10px;border-top: none;border-right:none;border-bottom:none;padding: 5px;" align="left" valign="middle">Billed to </td>
-                <td style="font-size: 10px;border-top: none;border-left:none;border-bottom:none;padding: 5px;" align="left" valign="middle">Synergy Maritime Recruitment</td>
-                <td style="font-size: 10px;border-top: none;border-right:none;border-bottom:none;padding: 5px;" align="left" valign="middle">Rank</td>
-                <td style="font-size: 10px;border-top: none;border-left:none;border-bottom:none;padding: 5px;" align="left" valign="middle">C/O</td>
-              </tr>
-              <tr style="border-top: none;border-bottom: none;">
-                <td style="font-size: 10px;border-right:none;border-top: none;border-bottom:none;padding: 5px;" align="left" valign="middle">State of Supply & State code</td>
-                <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-left: none;" align="left" valign="middle">Tamil Nadu & 33</td>
-                <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding: 5px;border-bottom:none;border-left: none;border-top: none;" align="left" valign="middle">Services Private Limited,  3/381 Rajiv Gandhi Salai,  Mettukuppam; Chennai,  600097, Chennai Tamil Nadu </td>
-                <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-right: none;" align="left" valign="middle">Type of Room</td>
-                <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-left: none;" align="left" valign="middle">Single</td>
-              </tr>
-              <tr style="border-top: none;border-bottom: none;">
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">GSTIN </td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">33AAMCA9719R1ZU</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">Booked by</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">Chandra Sekar D</td>
-              </tr>
-              <tr style="border-top: none;border-bottom: none;">
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">Vessel Name</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">TBD</td>
-              </tr>
-              <tr style="border-top: none;border-bottom: none;">
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">PO No</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">PO/04232/17/19411 </td>
-              </tr>
-              <tr style="border-top: none;border-bottom: none;">
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">Check in Date/Time</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">2017-06-26 21:45:00 </td>
-              </tr>
-              <tr style="border-top: none;border-bottom: none;">
-                <td style="font-size: 10px;padding:5px;border-top: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-right: none;" align="left" valign="middle">Check out Date/Time</td>
-                <td style="font-size: 10px;padding:5px;border-top: none;border-left: none;" align="left" valign="middle">2017-07-05 04:00:00 </td>
-              </tr>
-            </table>
+    <table width="100%" border="1" cellspacing="0" cellpadding="0" class="billing-cztm-t1 invoicetable" >
+      <tr style="background: #fff;border: 1px solid black;border-bottom: none; ">
+        <td style="padding: 5px;" colspan="6" align="center" valign="middle">
+          <img src="<?=base_url();?>assets/images/logo.png" style="height: 70px;width: 70px;vertical-align: top;">
+          <h6 style="font-size:1.40rem;padding-top: 12px;display: inline-block;margin: 0 auto;">ANCHORPOINT HOSPITALITY PRIVATE LIMITED
+            <br><small style="float: right;font-size: 14px;font-style: italic;margin-right: 10px;">Your Own Space</small></h6>
+        </td>
+      </tr>
+      <tr align="center" style="background: rgb(227, 224, 255);border: 1px solid #000;border-top: none;border-bottom: none;">
+        <td style="padding: 5px;font-size: 12px;" colspan="6" align="center" valign="middle">3A,3B & 3C Aiswarya Prapancha Apartments, Madha Koil Street, Thoraipakkam,Chennai.</td>
+      </tr>
+      <tr align="center" style="border: 1px solid #000;border-top: none;border-bottom: none;">
+        <td style="padding: 5px;font-size: 12px;" colspan="6" align="center" valign="middle">
+          <strong>CIN - U55101KA2014PTC076899</strong>
+        </td>
+      </tr>
+      <tr align="center" style="background: rgb(227, 224, 255);">
+        <td style="padding: 5px;font-size: 12px;" colspan="6" align="center" valign="middle"> <strong>INVOICE</strong></td>
+      </tr>
+      <tr style="">
+        <td style="padding: 5px;" colspan="2" align="center" valign="middle"><strong>Invoice Details</strong></td>
+        <td style="padding: 5px;" colspan="2" align="center" valign="middle"><strong>Details of Receiver / Billed to</strong> </td>
+        <td style="padding: 5px;" colspan="2" align="center" valign="middle"><strong>Details</strong></td>
+      </tr>
+      <tr align="left" style="padding: 0 !important;border-top: 1px solid #000;border-bottom: none;">
+        <td style="font-size: 10px;;padding: 5px;border-right: none;border-bottom: none;" width="15%" align="left" valign="middle">Invoice Date </td>
+        <td style="font-size: 10px;padding: 5px;border-left: none;border-right:1px solid #000;border-bottom: none; " width="17%" align="left" valign="middle">31 July 2017 </td>
+        <td style="font-size: 10px;padding: 5px;border-right: none;border-bottom: none;" width="12%" align="left" valign="middle">GSTIN </td>
+        <td style="font-size: 10px;padding: 5px;border-left: none;border-right:1px solid #000;border-bottom: none;" width="25%" align="left" valign="middle">33AAUCS6460K1ZQ</td>
+        <td style="font-size: 10px;padding: 5px;border-right: none;border-bottom: none;" width="11%" align="left" valign="middle">Guest name</td>
+        <td style="font-size: 10px;padding: 5px;border-left: none;border-bottom: none;" width="20%" align="left" valign="middle">Sandeep Kumar Chowdhary</td>
+      </tr>
+      <tr style="border-top: none;border-bottom: none;">
+        <td style="font-size: 10px;border-right:none;border-top: none;border-bottom:none;padding: 5px;" align="left" valign="middle">Invoice No</td>
+        <td style="font-size: 10px;border-left: none;border-top: none;border-bottom:none;padding: 5px;" align="left" valign="middle">APH-1718-INV-517</td>
+        <td style="font-size: 10px;border-top: none;border-right:none;border-bottom:none;padding: 5px;" align="left" valign="middle">Billed to </td>
+        <td style="font-size: 10px;border-top: none;border-left:none;border-bottom:none;padding: 5px;" align="left" valign="middle">Synergy Maritime Recruitment</td>
+        <td style="font-size: 10px;border-top: none;border-right:none;border-bottom:none;padding: 5px;" align="left" valign="middle">Rank</td>
+        <td style="font-size: 10px;border-top: none;border-left:none;border-bottom:none;padding: 5px;" align="left" valign="middle">C/O</td>
+      </tr>
+      <tr style="border-top: none;border-bottom: none;">
+        <td style="font-size: 10px;border-right:none;border-top: none;border-bottom:none;padding: 5px;" align="left" valign="middle">State of Supply & State code</td>
+        <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-left: none;" align="left" valign="middle">Tamil Nadu & 33</td>
+        <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding: 5px;border-bottom:none;border-left: none;border-top: none;" align="left" valign="middle">Services Private Limited,  3/381 Rajiv Gandhi Salai,  Mettukuppam; Chennai,  600097, Chennai Tamil Nadu </td>
+        <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-right: none;" align="left" valign="middle">Type of Room</td>
+        <td style="font-size: 10px;padding: 5px;border-bottom:none;border-top: none;border-left: none;" align="left" valign="middle">Single</td>
+      </tr>
+      <tr style="border-top: none;border-bottom: none;">
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">GSTIN </td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">33AAMCA9719R1ZU</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">Booked by</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">Chandra Sekar D</td>
+      </tr>
+      <tr style="border-top: none;border-bottom: none;">
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">Vessel Name</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">TBD</td>
+      </tr>
+      <tr style="border-top: none;border-bottom: none;">
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">PO No</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">PO/04232/17/19411 </td>
+      </tr>
+      <tr style="border-top: none;border-bottom: none;">
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-right: none;" align="left" valign="middle">Check in Date/Time</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-bottom: none;border-left: none;" align="left" valign="middle">2017-06-26 21:45:00 </td>
+      </tr>
+      <tr style="border-top: none;border-bottom: none;">
+        <td style="font-size: 10px;padding:5px;border-top: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-right: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-left: none;" align="left" valign="middle">&nbsp;</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-right: none;" align="left" valign="middle">Check out Date/Time</td>
+        <td style="font-size: 10px;padding:5px;border-top: none;border-left: none;" align="left" valign="middle">2017-07-05 04:00:00 </td>
+      </tr>
+    </table>
           </div>
           <h2 class="text-center" >Billing Details</h2>
           <div class="billing-details1-orflw">

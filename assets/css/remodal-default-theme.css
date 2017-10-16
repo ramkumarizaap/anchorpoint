@@ -240,3 +240,4 @@
 .lt-ie9 .remodal {
   width: 700px;
 }
+.remodal.modal-lg{max-width: 1200px !important;}

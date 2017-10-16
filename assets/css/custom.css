@@ -46,8 +46,8 @@ h5, h6{font-size: 1.40rem;}
 .header .navbar-dark .navbar-nav li a.nav-link, 
 .header .navbar-dark .navbar-nav li a {
   margin-right:5px;
-  padding-left:15px;
-  padding-right:15px;
+  padding-left:10px;
+  padding-right:10px;
 }
 .header .navbar-dark .navbar-nav li a.nav-link:hover, 
 .header .navbar-dark .navbar-nav li.main-menu-active a{ 
@@ -267,14 +267,75 @@ footer p { text-align: center; color: #dedede; margin-bottom: 0;}
 @media (max-width: 1024px){
 
   .header .navbar-dark .navbar-nav li a.nav-link, .header .navbar-dark .navbar-nav li a {
-      margin-right: 5px;
-      padding-left: 10px !important;
-      padding-right: 10px !important;
-      font-size: 1em !important;
+    margin-right: 5px;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    font-size: 1em !important;
   }
-
 }
 
+.label
+{
+  text-transform: uppercase;
+  padding: 2px 6px 4px 6px;
+  font-size: 10px;
+  color: #fff;
+  font-weight: 600;
+}
+.label-success {
+  background-color: #26A69A;
+}
+.label-danger {
+  background-color: #F3565D;
+}
 
+ul.navbar-nav li.nav-item ul
+{
+  display: none;
+  position: absolute;
+  background: #fff;
+  list-style: none;
+  text-align: left;
+  padding: 10px;
+  margin-left: 10px;
+  width: 200px;
+}
+ul.navbar-nav li.nav-item ul li.active a
+{
+ color: #fff !important;
+  background: #e31e24 !important;
+  background: -webkit-linear-gradient(to right, #e31e24, #391cff) !important; 
+  background: linear-gradient(to right, #e31e24, #391cff) !important;
+  border-radius: 30px;
+  cursor: pointer; 
+}
+ul.navbar-nav li.nav-item ul li:hover,ul.navbar-nav li.nav-item ul li a:hover
+{
+  color: #fff !important;
+  background: #e31e24;
+  background: -webkit-linear-gradient(to right, #e31e24, #391cff);
+  background: linear-gradient(to right, #e31e24, #391cff);
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+ul.navbar-nav li.nav-item ul li a
+{
+  padding: 10px !important;
+  width: 100%;
+  background: none !important;
+  display: block;
+  color: #000 !important;
+  text-decoration: none;
+}
+ul.navbar-nav li.nav-item:hover ul{display: block;}
+
+
+/*.booking_log.table tr td:nth-child(3){width: 60px !important;word-break: break-all;display: block; }*/
+
+.exe-span{background: black;padding: 5px;color: #fff;width: auto;text-align: center;}
+.off_name{cursor: pointer;}
+.off_name:hover .exe-span{display: block !important;}
+.exe-span.hide{display: none;}
 
 

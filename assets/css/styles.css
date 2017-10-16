@@ -108,7 +108,8 @@ i.fa.fa-key:before {
 .b-l-table-tile tr th { color: #fff; }
 .contact-cztm .col-lg-10 { background: #fff; padding-top: 37px; padding-bottom: 40px; border-radius: 5px; box-shadow: 0 8px 6px -6px #a7a7a7;}
 .contact-cztm button { margin-top: 33px; }
-.contact-cztm .form-control {border: none; border-bottom: 1px solid rgb(169, 169, 169); border-radius: 0; }
+.contact-cztm .form-control,.contact-cztm .select2 {border: none; border-bottom: 1px solid rgb(169, 169, 169); border-radius: 0; }
+.contact-cztm .select2-container--default .select2-selection--single { border:none;}
 .contact-cztm .form-control:focus { border-bottom: 2px solid #3c348d; }
 .feedback-cztm{
     cursor: pointer;
